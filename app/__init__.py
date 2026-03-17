@@ -1,0 +1,1 @@
+"""AllyVPN application package."""
