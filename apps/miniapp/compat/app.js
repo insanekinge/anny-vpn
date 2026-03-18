@@ -14,11 +14,13 @@
 
   function readParams() {
     var search = window.location.search || "";
+
     if (search.indexOf("?") === 0) {
       search = search.slice(1);
     }
 
     var params = {};
+
     if (!search) {
       return params;
     }
@@ -27,6 +29,7 @@
       var parts = pair.split("=");
       var key = decodeURIComponent(parts[0] || "");
       var value = decodeURIComponent(parts[1] || "");
+
       if (key) {
         params[key] = value;
       }
@@ -37,9 +40,11 @@
 
   function inferTabFromSection(section) {
     var value = (section || "").toLowerCase();
+
     if (!value) {
       return "";
     }
+
     if (
       value.indexOf("billing") !== -1 ||
       value.indexOf("settings") !== -1 ||
@@ -48,12 +53,15 @@
     ) {
       return "profile";
     }
+
     if (value.indexOf("subscription") !== -1) {
       return "home";
     }
+
     if (value.indexOf("server") !== -1 || value.indexOf("access") !== -1) {
       return "access";
     }
+
     return "";
   }
 
@@ -77,6 +85,7 @@
 
   function showToast(message) {
     var toast = byId("toast");
+
     if (!toast) {
       return;
     }
@@ -102,7 +111,7 @@
     document.documentElement.setAttribute("data-theme", theme);
 
     if (themeCopy) {
-      themeCopy.textContent = theme === "dark" ? "Тёмная версия интерфейса" : "Светлая версия интерфейса";
+      themeCopy.textContent = theme === "dark" ? "Тёмная тема включена" : "Светлая тема включена";
     }
 
     if (toggle) {
@@ -113,9 +122,11 @@
     try {
       if (window.Telegram && window.Telegram.WebApp) {
         var webApp = window.Telegram.WebApp;
+
         if (webApp.setHeaderColor) {
           webApp.setHeaderColor(theme === "dark" ? "#0f0d12" : "#ffffff");
         }
+
         if (webApp.setBackgroundColor) {
           webApp.setBackgroundColor(theme === "dark" ? "#0f0d12" : "#f7f5fb");
         }
@@ -185,7 +196,7 @@
     if (isProtected) {
       status.textContent = "Protected";
       status.className = "status-pill status-pill--active";
-      title.textContent = "Подключение активно";
+      title.textContent = "Соединение активно";
       location.textContent = selectedLocation;
       buttonCopy.textContent = "Отключить";
       button.className = "button button--primary button--active";
@@ -202,6 +213,7 @@
   function toggleGuide() {
     var guide = byId("guide-card");
     guideOpen = !guideOpen;
+
     if (!guide) {
       return;
     }
@@ -217,9 +229,11 @@
 
   function refreshServers() {
     var stamp = byId("refresh-status");
+
     if (stamp) {
       stamp.textContent = "Список обновлён";
     }
+
     showToast("Список серверов обновлён");
   }
 
@@ -237,7 +251,7 @@
 
     selectedLocation = card.getAttribute("data-location") || selectedLocation;
     updateProtectionState();
-    showToast("Сервер выбран: " + (card.getAttribute("data-server-name") || "локация"));
+    showToast("Выбран сервер: " + (card.getAttribute("data-server-name") || "локация"));
   }
 
   function filterServers(value) {
@@ -260,6 +274,7 @@
 
     for (index = 0; index < groups.length; index += 1) {
       var visibleCards = groups[index].querySelectorAll(".server-card:not([hidden])");
+
       if (visibleCards.length) {
         groups[index].removeAttribute("hidden");
       } else {
@@ -271,17 +286,18 @@
   function bootstrapTelegram() {
     try {
       if (!window.Telegram || !window.Telegram.WebApp) {
-        setTheme("light");
+        setTheme("dark");
         return;
       }
 
       var webApp = window.Telegram.WebApp;
-      var theme = webApp.colorScheme === "dark" ? "dark" : "light";
+      var theme = webApp.colorScheme === "light" ? "light" : "dark";
+
       webApp.ready();
       webApp.expand();
       setTheme(theme);
     } catch (error) {
-      setTheme("light");
+      setTheme("dark");
       if (window.console && window.console.warn) {
         window.console.warn("Telegram bootstrap failed", error);
       }
@@ -290,12 +306,12 @@
 
   function handleAction(action) {
     if (action === "billing-view") {
-      showToast("История платежей будет подключена на следующем этапе");
+      showToast("История платежей появится на следующем этапе");
       return true;
     }
 
     if (action === "privacy-open") {
-      showToast("Раздел приватности доступен в следующей версии");
+      showToast("Раздел приватности будет расширен позже");
       return true;
     }
 
@@ -373,7 +389,7 @@
     if (action.type === "connect") {
       isProtected = !isProtected;
       updateProtectionState();
-      showToast(isProtected ? "VPN-подключение активировано" : "VPN-подключение отключено");
+      showToast(isProtected ? "VPN активирован" : "VPN отключён");
       return;
     }
 
@@ -388,7 +404,7 @@
     }
 
     if (action.type === "theme") {
-      var current = document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+      var current = document.documentElement.getAttribute("data-theme") === "light" ? "light" : "dark";
       setTheme(current === "dark" ? "light" : "dark");
       showToast(current === "dark" ? "Включена светлая тема" : "Включена тёмная тема");
       return;
