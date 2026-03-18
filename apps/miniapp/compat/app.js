@@ -110,7 +110,7 @@
     document.documentElement.setAttribute("data-theme", theme);
 
     if (themeCopy) {
-      themeCopy.textContent = theme === "dark" ? "Dark mode" : "Light mode";
+      themeCopy.textContent = theme === "dark" ? "Тёмная тема включена" : "Светлая тема включена";
     }
 
     if (toggle) {
@@ -200,7 +200,7 @@
     var stamp = byId("refresh-status");
 
     if (stamp) {
-      stamp.textContent = "Updated just now";
+      stamp.textContent = "Обновлено только что";
     }
 
     showToast("Список серверов обновлён");
@@ -252,21 +252,21 @@
     }
   }
 
-  function bootstrapTelegram() {
+  function bootstrapTelegram(preferredTheme) {
     try {
       if (!window.Telegram || !window.Telegram.WebApp) {
-        setTheme("dark");
+        setTheme(preferredTheme || "dark");
         return;
       }
 
       var webApp = window.Telegram.WebApp;
-      var theme = webApp.colorScheme === "light" ? "light" : "dark";
+      var theme = preferredTheme || (webApp.colorScheme === "light" ? "light" : "dark");
 
       webApp.ready();
       webApp.expand();
       setTheme(theme);
     } catch (error) {
-      setTheme("dark");
+      setTheme(preferredTheme || "dark");
       if (window.console && window.console.warn) {
         window.console.warn("Telegram bootstrap failed", error);
       }
@@ -385,12 +385,13 @@
   }
 
   function start() {
+    var params = readParams();
+    var preferredTheme = params.theme === "light" ? "light" : params.theme === "dark" ? "dark" : "";
+
     document.addEventListener("click", handleClick, false);
     document.addEventListener("input", handleInput, false);
-    bootstrapTelegram();
+    bootstrapTelegram(preferredTheme);
     updateHomeLocation();
-
-    var params = readParams();
     activateTab(params.tab || "", params.section || "");
   }
 

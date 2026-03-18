@@ -3,6 +3,11 @@
 :root {
   --ally-font-display: "Outfit", "Segoe UI", sans-serif;
   --ally-font-body: "Plus Jakarta Sans", "Segoe UI", sans-serif;
+  --ally-space-1: 8px;
+  --ally-space-2: 12px;
+  --ally-space-3: 16px;
+  --ally-space-4: 20px;
+  --ally-space-5: 24px;
   --ally-color-bg: #0f0d12;
   --ally-color-bg-top: #191425;
   --ally-color-card: #1a171f;
@@ -96,7 +101,7 @@ button {
   max-width: 420px;
   min-height: 100vh;
   margin: 0 auto;
-  padding: 24px 16px calc(104px + env(safe-area-inset-bottom));
+  padding: var(--ally-space-5) var(--ally-space-3) calc(128px + env(safe-area-inset-bottom));
 }
 
 .miniapp__content,
@@ -122,7 +127,7 @@ button {
 .server-groups,
 .server-group,
 .profile-section {
-  gap: 18px;
+  gap: var(--ally-space-3);
 }
 
 .topbar,
@@ -157,15 +162,15 @@ button {
 }
 
 .brand__logo {
-  width: 34px;
-  height: 34px;
+  width: 38px;
+  height: 38px;
   color: var(--ally-color-primary);
 }
 
 .brand__name {
   font-family: var(--ally-font-display);
   font-size: 20px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.05em;
 }
 
@@ -180,7 +185,7 @@ button {
   background: rgba(255, 255, 255, 0.05);
   color: var(--ally-color-text-muted);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   letter-spacing: -0.01em;
   backdrop-filter: blur(10px);
 }
@@ -215,8 +220,8 @@ button {
 }
 
 .hero-card {
-  gap: 22px;
-  padding: 22px;
+  gap: var(--ally-space-4);
+  padding: var(--ally-space-4);
   overflow: hidden;
 }
 
@@ -229,7 +234,7 @@ button {
   background: rgba(124, 74, 204, 0.08);
   color: var(--ally-color-primary-soft);
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .hero-card__title,
@@ -239,6 +244,7 @@ button {
   font-family: var(--ally-font-display);
   line-height: 1.02;
   letter-spacing: -0.05em;
+  color: var(--ally-color-text);
 }
 
 .hero-card__title {
@@ -264,12 +270,12 @@ button {
 }
 
 .hero-card__meta {
-  gap: 12px;
+  gap: var(--ally-space-2);
 }
 
 .meta-chip {
-  gap: 8px;
-  padding: 14px 16px;
+  gap: var(--ally-space-1);
+  padding: 14px var(--ally-space-3);
   border: 1px solid var(--ally-color-stroke);
   border-radius: 18px;
   background: rgba(255, 255, 255, 0.04);
@@ -281,47 +287,18 @@ button {
 
 .meta-chip__label {
   font-size: 12px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--ally-color-text-soft);
 }
 
 .meta-chip__value {
   font-size: 15px;
-  font-weight: 700;
+  font-weight: 600;
   color: var(--ally-color-text);
 }
 
-.hero-card__visual {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.bot-visual {
-  position: relative;
-  width: 100%;
-  max-width: 230px;
-  aspect-ratio: 1 / 1.1;
-}
-
-.bot-visual::before {
-  content: "";
-  position: absolute;
-  inset: 12% 10%;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(124, 74, 204, 0.28) 0%, rgba(124, 74, 204, 0) 72%);
-  filter: blur(10px);
-}
-
-.bot-visual__art {
-  position: relative;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-}
-
 .card {
-  padding: 18px;
+  padding: var(--ally-space-3);
 }
 
 .feature-card {
@@ -336,8 +313,8 @@ button {
 .profile-hero__avatar {
   display: grid;
   place-items: center;
-  width: 46px;
-  height: 46px;
+  width: 52px;
+  height: 52px;
   flex: 0 0 auto;
   border-radius: 50%;
   background: rgba(124, 74, 204, 0.12);
@@ -365,7 +342,7 @@ button {
 .profile-hero__name,
 .guide-card__title {
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .link-button,
@@ -381,7 +358,7 @@ button {
   border: 0;
   background: transparent;
   color: var(--ally-color-primary-soft);
-  font-weight: 700;
+  font-weight: 600;
   transition: color var(--ally-duration-fast) ease, opacity var(--ally-duration-fast) ease;
 }
 
@@ -398,7 +375,7 @@ button {
 .action-card {
   align-items: center;
   gap: 12px;
-  padding: 18px 16px;
+  padding: var(--ally-space-3);
 }
 
 .action-card,
@@ -424,7 +401,7 @@ button {
 
 .guide-card {
   gap: 14px;
-  padding: 20px 18px;
+  padding: var(--ally-space-4) var(--ally-space-3);
 }
 
 .guide-card__header {
@@ -439,7 +416,7 @@ button {
 .search-field {
   align-items: center;
   gap: 12px;
-  padding: 15px 16px;
+  padding: 15px var(--ally-space-3);
   border: 1px solid var(--ally-color-stroke);
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.04);
@@ -488,7 +465,7 @@ button {
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  padding: 18px 16px;
+  padding: var(--ally-space-3);
 }
 
 .server-card__main,
@@ -537,15 +514,15 @@ button {
 
 .profile-hero {
   align-items: flex-start;
-  gap: 16px;
-  padding: 20px;
+  gap: var(--ally-space-3);
+  padding: var(--ally-space-4);
   background: var(--ally-gradient-primary);
   box-shadow: 0 18px 34px rgba(124, 74, 204, 0.28);
 }
 
 .profile-hero__avatar {
-  width: 60px;
-  height: 60px;
+  width: 64px;
+  height: 64px;
   background: rgba(255, 255, 255, 0.14);
   color: #ffffff;
 }
@@ -565,8 +542,8 @@ button {
 }
 
 .profile-hero__meta {
-  margin-top: 16px;
-  padding-top: 16px;
+  margin-top: var(--ally-space-3);
+  padding-top: var(--ally-space-3);
   border-top: 1px solid rgba(255, 255, 255, 0.18);
 }
 
@@ -575,14 +552,14 @@ button {
   margin-top: 4px;
   font-family: var(--ally-font-display);
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .row-card {
   align-items: center;
   justify-content: space-between;
   gap: 14px;
-  padding: 18px 16px;
+  padding: var(--ally-space-3);
 }
 
 .toggle {
@@ -619,10 +596,10 @@ button {
 
 .tabbar {
   position: sticky;
-  bottom: 0;
+  bottom: calc(14px + env(safe-area-inset-bottom));
   z-index: 5;
   gap: 10px;
-  margin-top: 18px;
+  margin-top: var(--ally-space-4);
   padding: 10px;
   border: 1px solid var(--ally-color-stroke);
   border-radius: 24px;
@@ -660,7 +637,7 @@ button {
 
 .tabbar__label {
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .toast {
@@ -692,15 +669,34 @@ button {
 }
 
 .icon--small {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
 }
 
 .icon--server,
 .icon--avatar,
 .tabbar__icon {
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
+}
+
+html[data-theme="light"] .tabbar {
+  background: rgba(255, 255, 255, 0.94);
+  border-color: rgba(42, 28, 64, 0.1);
+  box-shadow: 0 18px 34px rgba(42, 28, 64, 0.08);
+}
+
+html[data-theme="light"] .tabbar__item {
+  color: var(--ally-color-text-soft);
+}
+
+html[data-theme="light"] .tabbar__item--active {
+  background: rgba(124, 74, 204, 0.12);
+  color: var(--ally-color-primary);
+}
+
+html[data-theme="light"] .tabbar__item:hover {
+  background: rgba(124, 74, 204, 0.06);
 }
 
 @media (max-width: 520px) {
