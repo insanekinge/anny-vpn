@@ -1,6 +1,5 @@
 (function () {
   var guideOpen = true;
-  var isProtected = false;
   var toastTimer = null;
   var selectedLocation = "Нью-Йорк, Соединённые Штаты";
 
@@ -111,7 +110,7 @@
     document.documentElement.setAttribute("data-theme", theme);
 
     if (themeCopy) {
-      themeCopy.textContent = theme === "dark" ? "Тёмная тема включена" : "Светлая тема включена";
+      themeCopy.textContent = theme === "dark" ? "Dark mode" : "Light mode";
     }
 
     if (toggle) {
@@ -122,27 +121,17 @@
     try {
       if (window.Telegram && window.Telegram.WebApp) {
         var webApp = window.Telegram.WebApp;
-
         if (webApp.setHeaderColor) {
           webApp.setHeaderColor(theme === "dark" ? "#0f0d12" : "#ffffff");
         }
-
         if (webApp.setBackgroundColor) {
-          webApp.setBackgroundColor(theme === "dark" ? "#0f0d12" : "#f7f5fb");
+          webApp.setBackgroundColor(theme === "dark" ? "#0f0d12" : "#f4f1fa");
         }
       }
     } catch (error) {
       if (window.console && window.console.warn) {
         window.console.warn("Theme bridge failed", error);
       }
-    }
-  }
-
-  function scrollToTop() {
-    try {
-      window.scrollTo(0, 0);
-    } catch (error) {
-      return;
     }
   }
 
@@ -170,43 +159,23 @@
       }
     }
 
-    scrollToTop();
-
     if (sectionId) {
       window.setTimeout(function () {
         var element = byId(sectionId);
         if (element && element.scrollIntoView) {
           element.scrollIntoView({ behavior: "smooth", block: "start" });
         }
-      }, 40);
+      }, 50);
+    } else {
+      window.scrollTo(0, 0);
     }
   }
 
-  function updateProtectionState() {
-    var status = byId("protection-status");
-    var title = byId("hero-status-title");
-    var location = byId("hero-location");
-    var buttonCopy = byId("connect-button-copy");
-    var button = byId("connect-toggle");
+  function updateHomeLocation() {
+    var statusCopy = byId("subscription-status-copy");
 
-    if (!status || !title || !location || !buttonCopy || !button) {
-      return;
-    }
-
-    if (isProtected) {
-      status.textContent = "Protected";
-      status.className = "status-pill status-pill--active";
-      title.textContent = "Соединение активно";
-      location.textContent = selectedLocation;
-      buttonCopy.textContent = "Отключить";
-      button.className = "button button--primary button--active";
-    } else {
-      status.textContent = "Not Protected";
-      status.className = "status-pill";
-      title.textContent = "Вы не защищены";
-      location.textContent = selectedLocation;
-      buttonCopy.textContent = "Подключить";
-      button.className = "button button--primary";
+    if (statusCopy) {
+      statusCopy.textContent = "Активна • " + selectedLocation;
     }
   }
 
@@ -231,7 +200,7 @@
     var stamp = byId("refresh-status");
 
     if (stamp) {
-      stamp.textContent = "Список обновлён";
+      stamp.textContent = "Updated just now";
     }
 
     showToast("Список серверов обновлён");
@@ -250,7 +219,7 @@
     }
 
     selectedLocation = card.getAttribute("data-location") || selectedLocation;
-    updateProtectionState();
+    updateHomeLocation();
     showToast("Выбран сервер: " + (card.getAttribute("data-server-name") || "локация"));
   }
 
@@ -343,10 +312,6 @@
         return { type: "action", value: target.getAttribute("data-action") };
       }
 
-      if (target.id === "connect-toggle") {
-        return { type: "connect" };
-      }
-
       if (target.id === "refresh-servers") {
         return { type: "refresh" };
       }
@@ -386,13 +351,6 @@
       return;
     }
 
-    if (action.type === "connect") {
-      isProtected = !isProtected;
-      updateProtectionState();
-      showToast(isProtected ? "VPN активирован" : "VPN отключён");
-      return;
-    }
-
     if (action.type === "refresh") {
       refreshServers();
       return;
@@ -429,9 +387,8 @@
   function start() {
     document.addEventListener("click", handleClick, false);
     document.addEventListener("input", handleInput, false);
-
     bootstrapTelegram();
-    updateProtectionState();
+    updateHomeLocation();
 
     var params = readParams();
     activateTab(params.tab || "", params.section || "");

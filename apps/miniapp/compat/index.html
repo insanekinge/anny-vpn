@@ -9,7 +9,7 @@
   <body>
     <div class="miniapp">
       <div class="miniapp__device">
-        <main class="miniapp__content" id="miniapp-content">
+        <main class="miniapp__content">
           <section class="screen screen--home" data-screen="home">
             <header class="topbar">
               <div class="brand">
@@ -27,45 +27,65 @@
                 </span>
                 <span class="brand__name">AllyVPN</span>
               </div>
-              <span class="status-pill" id="protection-status">Не защищено</span>
+              <span class="status-pill" id="subscription-pill">Premium active</span>
             </header>
 
-            <article class="card hero-card">
-              <div class="hero-card__orb">
-                <svg class="icon icon--hero" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M12 2.5 5.5 4.9v6.2c0 4.2 2.7 7.9 6.5 9.1 3.8-1.2 6.5-4.9 6.5-9.1V4.9L12 2.5Z"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.8"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-              </div>
+            <article class="hero-card">
               <div class="hero-card__copy">
-                <h1 class="hero-card__title" id="hero-status-title">Вы не защищены</h1>
-                <p class="hero-card__location" id="hero-location">Нью-Йорк, Соединённые Штаты</p>
+                <span class="hero-card__eyebrow">Привет, John</span>
+                <h1 class="hero-card__title">Ваш личный кабинет AllyVPN готов</h1>
+                <p class="hero-card__text">
+                  Здесь виден статус подписки, доступ к серверам, поддержка и все ключевые настройки аккаунта.
+                </p>
+                <div class="hero-card__meta">
+                  <div class="meta-chip">
+                    <span class="meta-chip__label">Подписка</span>
+                    <strong class="meta-chip__value" id="subscription-status-copy">Активна до марта 2027</strong>
+                  </div>
+                  <div class="meta-chip meta-chip--subtle">
+                    <span class="meta-chip__label">Пользователь</span>
+                    <strong class="meta-chip__value">@johanderson</strong>
+                  </div>
+                </div>
               </div>
-              <button type="button" class="button button--primary" id="connect-toggle">
-                <svg class="icon icon--button" viewBox="0 0 24 24" aria-hidden="true">
-                  <path d="M12 3v9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                  <path
-                    d="M7.2 5.9a7 7 0 1 0 9.6 0"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  />
-                </svg>
-                <span id="connect-button-copy">Подключить</span>
-              </button>
+
+              <div class="hero-card__visual">
+                <div class="bot-visual">
+                  <svg class="bot-visual__art" viewBox="0 0 220 240" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="allyBotGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#caa8ff" />
+                        <stop offset="55%" stop-color="#8f54ff" />
+                        <stop offset="100%" stop-color="#5b29b6" />
+                      </linearGradient>
+                      <radialGradient id="allyBotAura" cx="50%" cy="50%" r="50%">
+                        <stop offset="0%" stop-color="rgba(179,45,255,0.75)" />
+                        <stop offset="100%" stop-color="rgba(179,45,255,0)" />
+                      </radialGradient>
+                    </defs>
+                    <ellipse cx="110" cy="214" rx="76" ry="16" fill="rgba(143,84,255,0.22)" />
+                    <circle cx="110" cy="114" r="88" fill="url(#allyBotAura)" />
+                    <rect x="66" y="28" width="88" height="84" rx="42" fill="#f7f2ff" />
+                    <rect x="76" y="38" width="68" height="64" rx="30" fill="#16131d" />
+                    <circle cx="96" cy="70" r="10" fill="#8fe2ff" />
+                    <circle cx="124" cy="70" r="10" fill="#8fe2ff" />
+                    <path d="M98 89c7 5 17 5 24 0" fill="none" stroke="#2f2b39" stroke-width="4" stroke-linecap="round" />
+                    <rect x="82" y="104" width="56" height="18" rx="9" fill="#d7c4ff" />
+                    <path d="M70 118c-18 9-31 25-31 49 0 21 10 34 24 44 8 5 19 1 21-9l6-41-20-43Z" fill="url(#allyBotGlow)" opacity="0.62" />
+                    <path d="M150 118c18 9 31 25 31 49 0 21-10 34-24 44-8 5-19 1-21-9l-6-41 20-43Z" fill="url(#allyBotGlow)" opacity="0.62" />
+                    <path d="M74 120c0-16 14-29 31-29h10c17 0 31 13 31 29v52c0 22-16 39-36 39s-36-17-36-39v-52Z" fill="#191620" />
+                    <path d="M88 132h44l-4 28H92l-4-28Z" fill="#231a33" />
+                    <path d="M110 134 82 146v28c0 18 12 34 28 39 16-5 28-21 28-39v-28l-28-12Z" fill="#ece0ff" />
+                    <path d="M110 142 90 151v21c0 13 8 24 20 28 12-4 20-15 20-28v-21l-20-9Z" fill="url(#allyBotGlow)" />
+                  </svg>
+                </div>
+              </div>
             </article>
 
-            <article class="card gradient-card" id="subscription">
-              <div class="gradient-card__copy">
-                <div class="gradient-card__eyebrow">
-                  <svg class="icon icon--tiny" viewBox="0 0 24 24" aria-hidden="true">
+            <section class="summary-grid">
+              <article class="card card--feature" id="subscription">
+                <div class="feature-card__icon">
+                  <svg class="icon icon--small" viewBox="0 0 24 24" aria-hidden="true">
                     <path
                       d="m7 20 5-3 5 3-1.6-5 4.1-3.3-5.2-.2L12 6l-2.3 5.5-5.2.2 4.1 3.3L7 20Z"
                       fill="none"
@@ -74,57 +94,45 @@
                       stroke-linejoin="round"
                     />
                   </svg>
-                  <span>Premium Plan</span>
                 </div>
-                <strong class="gradient-card__title">Подписка активна</strong>
-                <p class="gradient-card__meta">Действует до марта 2027</p>
-              </div>
-              <div class="gradient-card__side">
-                <strong class="gradient-card__price">$99/yr</strong>
-                <button
-                  type="button"
-                  class="link-button link-button--light"
-                  data-target-tab="profile"
-                  data-target-section="billing-section"
-                >
-                  Смотреть
+                <div class="feature-card__copy">
+                  <strong class="feature-card__title">Премиум план</strong>
+                  <p class="feature-card__text">Продление в марте 2027</p>
+                </div>
+                <button type="button" class="link-button" data-target-tab="profile" data-target-section="billing-section">
+                  Управлять
                 </button>
-              </div>
-            </article>
+              </article>
 
-            <article class="card support-card" id="support">
-              <div class="support-card__icon">
-                <svg class="icon icon--small" viewBox="0 0 24 24" aria-hidden="true">
-                  <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2" />
-                  <path
-                    d="M9.8 9.4a2.4 2.4 0 0 1 4.4 1.2c0 1.4-1.5 2-2.2 2.6-.5.5-.6.8-.6 1.4"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  />
-                  <circle cx="12" cy="17.2" r="1" fill="currentColor" />
-                </svg>
-              </div>
-              <div class="support-card__copy">
-                <strong class="support-card__title">Поддержка</strong>
-                <p class="support-card__text">Поможем с доступом, настройкой и вопросами по аккаунту.</p>
-              </div>
-              <button
-                type="button"
-                class="link-button"
-                data-target-tab="profile"
-                data-target-section="support-section"
-              >
-                Открыть
-              </button>
-            </article>
+              <article class="card card--feature" id="support">
+                <div class="feature-card__icon feature-card__icon--soft">
+                  <svg class="icon icon--small" viewBox="0 0 24 24" aria-hidden="true">
+                    <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2" />
+                    <path
+                      d="M9.8 9.4a2.4 2.4 0 0 1 4.4 1.2c0 1.4-1.5 2-2.2 2.6-.5.5-.6.8-.6 1.4"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                    />
+                    <circle cx="12" cy="17.2" r="1" fill="currentColor" />
+                  </svg>
+                </div>
+                <div class="feature-card__copy">
+                  <strong class="feature-card__title">Поддержка</strong>
+                  <p class="feature-card__text">Помощь по подключению и доступу</p>
+                </div>
+                <button type="button" class="link-button" data-target-tab="profile" data-target-section="support-section">
+                  Открыть
+                </button>
+              </article>
+            </section>
           </section>
 
           <section class="screen screen--access" data-screen="access" hidden>
             <header class="section-header">
               <h1 class="section-header__title">Доступ к серверам</h1>
-              <p class="section-header__subtitle">Выберите подходящую локацию и проверьте задержку перед подключением.</p>
+              <p class="section-header__subtitle">Выберите сервер с оптимальным пингом и быстро обновите список локаций.</p>
             </header>
 
             <div class="action-grid">
@@ -149,8 +157,8 @@
                   </svg>
                 </span>
                 <span class="action-card__copy">
-                  <strong>Обновить</strong>
-                  <span id="refresh-status">Обновить список</span>
+                  <strong>Refresh</strong>
+                  <span id="refresh-status">Update list</span>
                 </span>
               </button>
 
@@ -167,8 +175,8 @@
                   </svg>
                 </span>
                 <span class="action-card__copy">
-                  <strong>Гайд</strong>
-                  <span>Быстрая настройка</span>
+                  <strong>Guide</strong>
+                  <span>Setup help</span>
                 </span>
               </button>
             </div>
@@ -186,9 +194,9 @@
                 <strong class="guide-card__title">Быстрый старт</strong>
               </div>
               <ol class="guide-card__list">
-                <li>Выберите сервер из списка ниже.</li>
-                <li>Вернитесь на главный экран и нажмите «Подключить».</li>
-                <li>Для помощи и управления подпиской используйте профиль.</li>
+                <li>Выберите сервер с оптимальным пингом.</li>
+                <li>Откройте профиль, если нужно проверить подписку или получить помощь.</li>
+                <li>Обновите список серверов, если хотите пересчитать задержку.</li>
               </ol>
             </article>
 
@@ -197,11 +205,11 @@
                 <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2" />
                 <path d="m16 16 4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
               </svg>
-              <input type="text" id="server-search" placeholder="Поиск серверов, стран или городов..." />
+              <input type="text" id="server-search" placeholder="Search servers, countries, or cities..." />
             </label>
 
             <div class="server-groups">
-              <section class="server-group" data-group-name="united states us new york los angeles chicago">
+              <section class="server-group" data-group-name="us united states new york los angeles chicago">
                 <div class="server-group__title-row">
                   <h2 class="server-group__title">US United States</h2>
                   <span class="server-group__count">(3)</span>
@@ -211,20 +219,8 @@
                   <div class="server-card__main">
                     <div class="server-card__icon">
                       <svg class="icon icon--server" viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                          d="M4.5 9.5C6.8 7.5 9.4 6.5 12 6.5s5.2 1 7.5 3"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                        />
-                        <path
-                          d="M7.7 12.8A6.3 6.3 0 0 1 12 11.2c1.5 0 3 .5 4.3 1.6"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                        />
+                        <path d="M4.5 9.5C6.8 7.5 9.4 6.5 12 6.5s5.2 1 7.5 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <path d="M7.7 12.8A6.3 6.3 0 0 1 12 11.2c1.5 0 3 .5 4.3 1.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                         <path d="M10.4 16a2.5 2.5 0 0 1 3.2 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                         <circle cx="12" cy="18.2" r="1.2" fill="currentColor" />
                       </svg>
@@ -244,20 +240,8 @@
                   <div class="server-card__main">
                     <div class="server-card__icon server-card__icon--muted">
                       <svg class="icon icon--server" viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                          d="M4.5 9.5C6.8 7.5 9.4 6.5 12 6.5s5.2 1 7.5 3"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                        />
-                        <path
-                          d="M7.7 12.8A6.3 6.3 0 0 1 12 11.2c1.5 0 3 .5 4.3 1.6"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                        />
+                        <path d="M4.5 9.5C6.8 7.5 9.4 6.5 12 6.5s5.2 1 7.5 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <path d="M7.7 12.8A6.3 6.3 0 0 1 12 11.2c1.5 0 3 .5 4.3 1.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                         <path d="M10.4 16a2.5 2.5 0 0 1 3.2 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                         <circle cx="12" cy="18.2" r="1.2" fill="currentColor" />
                       </svg>
@@ -277,20 +261,8 @@
                   <div class="server-card__main">
                     <div class="server-card__icon server-card__icon--muted">
                       <svg class="icon icon--server" viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                          d="M4.5 9.5C6.8 7.5 9.4 6.5 12 6.5s5.2 1 7.5 3"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                        />
-                        <path
-                          d="M7.7 12.8A6.3 6.3 0 0 1 12 11.2c1.5 0 3 .5 4.3 1.6"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                        />
+                        <path d="M4.5 9.5C6.8 7.5 9.4 6.5 12 6.5s5.2 1 7.5 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <path d="M7.7 12.8A6.3 6.3 0 0 1 12 11.2c1.5 0 3 .5 4.3 1.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                         <path d="M10.4 16a2.5 2.5 0 0 1 3.2 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                         <circle cx="12" cy="18.2" r="1.2" fill="currentColor" />
                       </svg>
@@ -307,7 +279,7 @@
                 </article>
               </section>
 
-              <section class="server-group" data-group-name="united kingdom gb london">
+              <section class="server-group" data-group-name="gb united kingdom london">
                 <div class="server-group__title-row">
                   <h2 class="server-group__title">GB United Kingdom</h2>
                   <span class="server-group__count">(2)</span>
@@ -317,20 +289,8 @@
                   <div class="server-card__main">
                     <div class="server-card__icon server-card__icon--muted">
                       <svg class="icon icon--server" viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                          d="M4.5 9.5C6.8 7.5 9.4 6.5 12 6.5s5.2 1 7.5 3"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                        />
-                        <path
-                          d="M7.7 12.8A6.3 6.3 0 0 1 12 11.2c1.5 0 3 .5 4.3 1.6"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                        />
+                        <path d="M4.5 9.5C6.8 7.5 9.4 6.5 12 6.5s5.2 1 7.5 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <path d="M7.7 12.8A6.3 6.3 0 0 1 12 11.2c1.5 0 3 .5 4.3 1.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                         <path d="M10.4 16a2.5 2.5 0 0 1 3.2 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                         <circle cx="12" cy="18.2" r="1.2" fill="currentColor" />
                       </svg>
@@ -350,20 +310,8 @@
                   <div class="server-card__main">
                     <div class="server-card__icon server-card__icon--muted">
                       <svg class="icon icon--server" viewBox="0 0 24 24" aria-hidden="true">
-                        <path
-                          d="M4.5 9.5C6.8 7.5 9.4 6.5 12 6.5s5.2 1 7.5 3"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                        />
-                        <path
-                          d="M7.7 12.8A6.3 6.3 0 0 1 12 11.2c1.5 0 3 .5 4.3 1.6"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                        />
+                        <path d="M4.5 9.5C6.8 7.5 9.4 6.5 12 6.5s5.2 1 7.5 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                        <path d="M7.7 12.8A6.3 6.3 0 0 1 12 11.2c1.5 0 3 .5 4.3 1.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                         <path d="M10.4 16a2.5 2.5 0 0 1 3.2 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                         <circle cx="12" cy="18.2" r="1.2" fill="currentColor" />
                       </svg>
@@ -384,21 +332,15 @@
 
           <section class="screen screen--profile" data-screen="profile" hidden>
             <header class="section-header">
-              <h1 class="section-header__title">Профиль</h1>
-              <p class="section-header__subtitle">Управляйте аккаунтом, подпиской и параметрами интерфейса.</p>
+              <h1 class="section-header__title">Profile</h1>
+              <p class="section-header__subtitle">Manage your account, subscription and preferences</p>
             </header>
 
             <article class="profile-hero">
               <div class="profile-hero__avatar">
                 <svg class="icon icon--avatar" viewBox="0 0 24 24" aria-hidden="true">
                   <circle cx="12" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="2" />
-                  <path
-                    d="M5.5 18c1.7-3 4-4.5 6.5-4.5S16.8 15 18.5 18"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                  />
+                  <path d="M5.5 18c1.7-3 4-4.5 6.5-4.5S16.8 15 18.5 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                 </svg>
               </div>
               <div class="profile-hero__content">
@@ -406,8 +348,8 @@
                 <span class="profile-hero__handle">@johanderson</span>
                 <div class="profile-hero__meta">
                   <div>
-                    <span class="profile-hero__label">С нами с</span>
-                    <strong class="profile-hero__value">Март 2025</strong>
+                    <span class="profile-hero__label">Member since</span>
+                    <strong class="profile-hero__value">March 2025</strong>
                   </div>
                   <div>
                     <span class="profile-hero__label">Account ID</span>
@@ -418,19 +360,13 @@
             </article>
 
             <div class="profile-section" id="billing-section">
-              <h2 class="profile-section__title">Подписка</h2>
+              <h2 class="profile-section__title">Subscription</h2>
 
               <article class="card row-card">
                 <div class="row-card__main">
                   <div class="row-card__icon">
                     <svg class="icon icon--small" viewBox="0 0 24 24" aria-hidden="true">
-                      <path
-                        d="m7 20 5-3 5 3-1.6-5 4.1-3.3-5.2-.2L12 6l-2.3 5.5-5.2.2 4.1 3.3L7 20Z"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="1.8"
-                        stroke-linejoin="round"
-                      />
+                      <path d="m7 20 5-3 5 3-1.6-5 4.1-3.3-5.2-.2L12 6l-2.3 5.5-5.2.2 4.1 3.3L7 20Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
                     </svg>
                   </div>
                   <div class="row-card__copy">
@@ -438,9 +374,7 @@
                     <p class="row-card__text">Active • Renews March 2027</p>
                   </div>
                 </div>
-                <button type="button" class="link-button" data-target-tab="home" data-target-section="subscription">
-                  Manage
-                </button>
+                <button type="button" class="link-button" data-action="billing-view">Manage</button>
               </article>
 
               <article class="card row-card">
@@ -461,7 +395,7 @@
             </div>
 
             <div class="profile-section" id="settings-section">
-              <h2 class="profile-section__title">Настройки</h2>
+              <h2 class="profile-section__title">Settings</h2>
 
               <article class="card row-card">
                 <div class="row-card__main">
@@ -478,11 +412,11 @@
                     </svg>
                   </div>
                   <div class="row-card__copy">
-                    <strong class="row-card__title">Тема</strong>
-                    <p class="row-card__text" id="theme-copy">Светлая версия интерфейса</p>
+                    <strong class="row-card__title">Theme</strong>
+                    <p class="row-card__text" id="theme-copy">Тёмная тема включена</p>
                   </div>
                 </div>
-                <button type="button" class="toggle" id="theme-toggle" aria-pressed="false">
+                <button type="button" class="toggle toggle--active" id="theme-toggle" aria-pressed="true">
                   <span class="toggle__knob"></span>
                 </button>
               </article>
@@ -503,15 +437,15 @@
                   </div>
                   <div class="row-card__copy">
                     <strong class="row-card__title">Privacy & Security</strong>
-                    <p class="row-card__text">Управление приватностью, конфиденциальностью и доступом.</p>
+                    <p class="row-card__text">Manage your privacy settings</p>
                   </div>
                 </div>
-                <button type="button" class="link-button" data-action="privacy-open">Открыть</button>
+                <button type="button" class="link-button" data-action="privacy-open">Open</button>
               </article>
             </div>
 
             <div class="profile-section" id="support-section">
-              <h2 class="profile-section__title">Поддержка</h2>
+              <h2 class="profile-section__title">Support</h2>
 
               <article class="card row-card">
                 <div class="row-card__main">
@@ -529,11 +463,11 @@
                     </svg>
                   </div>
                   <div class="row-card__copy">
-                    <strong class="row-card__title">Поддержка</strong>
-                    <p class="row-card__text">Написать в поддержку и получить помощь по подключению.</p>
+                    <strong class="row-card__title">Support</strong>
+                    <p class="row-card__text">Chat with support about access and setup</p>
                   </div>
                 </div>
-                <button type="button" class="link-button" data-action="support-open">Написать</button>
+                <button type="button" class="link-button" data-action="support-open">Write</button>
               </article>
             </div>
           </section>
@@ -545,23 +479,21 @@
               <path d="M5.5 10.5 12 5l6.5 5.5V18a1.5 1.5 0 0 1-1.5 1.5H7A1.5 1.5 0 0 1 5.5 18Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
               <path d="M9.5 19.5V13h5v6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
             </svg>
-            <span class="tabbar__label">Главная</span>
+            <span class="tabbar__label">Home</span>
           </button>
-
           <button type="button" class="tabbar__item" data-tab="access">
             <svg class="icon tabbar__icon" viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2" />
               <path d="M4 12h16M12 4a12 12 0 0 1 0 16M12 4a12 12 0 0 0 0 16" fill="none" stroke="currentColor" stroke-width="2" />
             </svg>
-            <span class="tabbar__label">Доступ</span>
+            <span class="tabbar__label">Access</span>
           </button>
-
           <button type="button" class="tabbar__item" data-tab="profile">
             <svg class="icon tabbar__icon" viewBox="0 0 24 24" aria-hidden="true">
               <circle cx="12" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="2" />
               <path d="M5.5 18c1.7-3 4-4.5 6.5-4.5S16.8 15 18.5 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
             </svg>
-            <span class="tabbar__label">Профиль</span>
+            <span class="tabbar__label">Profile</span>
           </button>
         </nav>
 
