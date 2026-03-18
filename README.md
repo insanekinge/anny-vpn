@@ -1,6 +1,11 @@
 # AllyVPN
 
-AllyVPN is a Telegram-controlled VPN service backend integrated with a real Marzban panel. The current repository is prepared for local self-hosted operation with production-oriented boundaries: secrets only from environment variables, service-layer isolation, admin-only subscription activation, and user access issuance through Marzban.
+AllyVPN now consists of two layers that evolve in parallel:
+
+- the existing Python backend and Telegram bot in `app/`
+- a frontend monorepo for the public website, Telegram Mini App, and mobile client UI
+
+The repository is organized so frontend work can move fast without breaking the current Marzban-integrated backend.
 
 ## Stack
 
@@ -8,109 +13,62 @@ AllyVPN is a Telegram-controlled VPN service backend integrated with a real Marz
 - aiogram 3.26.0
 - FastAPI 0.118.0
 - SQLAlchemy 2.0.48
-- httpx 0.28.1
-- pydantic-settings 2.13.1
-- SQLite for single-node local run, PostgreSQL-ready via `DATABASE_URL`
+- React 18 for website and Mini App
+- Expo / React Native for the mobile shell
+- npm workspaces for monorepo management
+- shared design tokens and web UI packages in `packages/`
 
-## Security Notes
+## Shared Design Direction
 
-- No secrets are hardcoded.
-- Telegram bot token is loaded from environment variables only.
-- `.env` is ignored by Git.
-- Marzban credentials are read only from environment variables.
-- The bot uses service-layer abstractions instead of raw HTTP calls in handlers.
-- Support messages are sanitized and length-limited before persistence.
-- SQLAlchemy ORM is used end-to-end, avoiding raw SQL string interpolation.
-- Logging is structured and does not print configured secrets.
+- Palette: `#ffffff`, `#7c4acc`, `#b699e6`, `#0f0d12`, `#2a1c40`
+- Typography:
+  - Display: `Sora`
+  - Body/UI: `Manrope`
+- Themes:
+  - dark
+  - light
 
-## Folder Structure
+## Repository Structure
 
 ```text
 app/
   api/
-    main.py
-    routes/
-      debug.py
-      health.py
   bot/
-    main.py
-    handlers/
-      about.py
-      access.py
-      configs.py
-      help.py
-      menu.py
-      start.py
-      subscription.py
-      support.py
-      utils.py
-    keyboards/
-      common.py
-      main_menu.py
-      subscription_menu.py
-    states/
-      support.py
-    texts/
-      messages.py
   core/
-    config.py
-    logging.py
-    security.py
   db/
-    base.py
-    models.py
-    seed.py
-    session.py
   integrations/
-    marzban/
-      client.py
-      exceptions.py
-      schemas.py
   services/
-    access_service.py
-    audit_service.py
-    config_service.py
-    marzban_service.py
-    subscription_service.py
-    support_service.py
-    user_service.py
-  tests/
-    conftest.py
-    test_marzban_stub.py
-    test_start_flow.py
-    test_subscription_service.py
-    test_support_flow.py
+apps/
+  website/
+  miniapp/
+  mobile/
+packages/
+  design-system/
+  ui-web/
 ```
 
-## Environment Variables
+## Backend Runtime
 
-Required for bot run:
+Required bot env values:
 
 - `BOT_TOKEN`
 - `MARZBAN_BASE_URL`
 - `MARZBAN_USERNAME`
 - `MARZBAN_PASSWORD`
 
-Core runtime:
+Additional env values:
 
 - `APP_ENV=production`
 - `BOT_USERNAME=@AllyVPNsbot`
 - `DATABASE_URL=sqlite+aiosqlite:///./allyvpn.db`
-- `LOG_LEVEL=INFO`
+- `MINIAPP_URL=https://your-public-miniapp-url`
 - `SUPPORT_USERNAME=`
 - `ADMIN_TELEGRAM_IDS=123456789,987654321`
+- `LOG_LEVEL=INFO`
 
-Marzban integration:
-
-- `MARZBAN_BASE_URL=`
-- `MARZBAN_USERNAME=`
-- `MARZBAN_PASSWORD=`
-- `MARZBAN_VERIFY_SSL=false`
-- `MARZBAN_TIMEOUT=15`
 ## Local Setup
 
-1. Create and activate a virtual environment.
-2. Install dependencies:
+Install backend:
 
 ```powershell
 python -m venv .venv
@@ -118,22 +76,40 @@ python -m venv .venv
 python -m pip install -r requirements.txt
 ```
 
-3. Fill `.env` with your real Telegram token and Marzban credentials:
+Fill `.env` with real backend credentials:
 
 ```env
 BOT_TOKEN=your_real_token_here
 MARZBAN_BASE_URL=https://your-marzban-host
 MARZBAN_USERNAME=admin_username
 MARZBAN_PASSWORD=admin_password
+MINIAPP_URL=https://your-public-miniapp-url
 ADMIN_TELEGRAM_IDS=your_telegram_id
+```
+
+The Telegram token is required for the bot side only:
+
+- `BOT_TOKEN` is required to run the bot and push the Mini App button into Telegram
+- the Mini App frontend itself does not contain the bot token and should never receive it
+
+Install frontend workspaces:
+
+```powershell
+npm install
 ```
 
 ## Run Commands
 
-Run the bot:
+Run the Telegram bot:
 
 ```powershell
 python -m app.bot.main
+```
+
+Sync Telegram commands and the Mini App button without starting the full backend:
+
+```powershell
+python -m app.bot.sync_telegram_ui
 ```
 
 Run the API:
@@ -142,65 +118,168 @@ Run the API:
 uvicorn app.api.main:app --reload
 ```
 
-## Operation
+Run the website:
 
-Implemented:
-
-- Telegram commands `/start`, `/help`, `/menu`, `/whoami`
-- Admin-only command `/grant_subscription <telegram_id> <plan_code> [active|trial]`
-- Inline navigation for subscription, access, configs, support, and about screens
-- Local user persistence and audit trail
-- Real Marzban authentication and user provisioning
-- FastAPI `/health`
-
-## Marzban Connection
-
-The Marzban integration is isolated in `app/integrations/marzban/` and wrapped by `app/services/marzban_service.py`.
-
-To run against your local Marzban now:
-
-1. Set `MARZBAN_BASE_URL`, `MARZBAN_USERNAME`, `MARZBAN_PASSWORD`.
-2. Restart the bot/API.
-3. Ask each user to send `/start` once.
-4. Send `/whoami` to get your Telegram ID.
-5. Put your admin Telegram ID into `ADMIN_TELEGRAM_IDS` in `.env`.
-6. Grant access:
-
-```text
-/grant_subscription <your_or_friend_telegram_id> m1 active
+```powershell
+npm run dev:website
 ```
 
-7. User presses `Get Access`.
+Stable static preview for the website:
 
-## For You And Your Friend
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\start-website-static.ps1
+```
 
-If the bot runs on your machine, both of you can use the Telegram bot immediately as long as:
+Run the Mini App locally:
 
-- your machine has outbound access to Telegram
-- the bot process can reach the local Marzban API
-- both users send `/start` once before you issue a subscription
+```powershell
+npm run dev:miniapp
+```
 
-For the VPN itself to work for your friend, the Marzban-managed VPN endpoints must be reachable from your friend's device. That means:
+Stable static preview for the Mini App:
 
-- do not use `127.0.0.1` or `localhost` in public-facing Marzban/Xray URLs
-- if your friend is outside your home network, expose the required inbound ports on the router
-- configure firewall rules to allow those inbound ports
-- use a domain or public IP that resolves to your server
-- use valid TLS certificates if your Marzban/Xray setup expects TLS
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\start-miniapp-static.ps1
+```
 
-If Marzban currently generates subscription URLs or node endpoints with local-only addresses, the bot may create access successfully, but your friend will not be able to connect.
+Stable static preview with a public temporary URL:
 
-The current client authenticates against `/api/admin/token` and works through adapter methods:
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\start-miniapp-static.ps1 -Public
+```
 
-- `login()`
-- `get_user(username)`
-- `create_user(payload)`
-- `modify_user(username, payload)`
-- `get_subscription_info(username)`
-- `get_user_subscription_url(username)`
+Run the mobile UI shell:
 
-## What To Build Next
+```powershell
+npm run dev:mobile
+```
 
-- Payment integration with provider webhooks and verified subscription activation.
-- Telegram Mini App for plan management and device onboarding.
-- Android client consuming subscription/config delivery APIs.
+Build the web apps:
+
+```powershell
+npm run check:web
+```
+
+## Current Frontend Scope
+
+Implemented now:
+
+- `apps/website`: premium landing-page shell
+- `apps/miniapp`: Telegram-oriented account shell
+- `apps/mobile`: three-screen mobile UI shell (`Home`, `Access`, `Profile`)
+- `packages/design-system`: tokens, themes, font imports
+- `packages/ui-web`: shared web primitives
+
+Not implemented yet:
+
+- real Telegram WebApp backend validation flow
+- VPN connection engine for the mobile client
+- payment flows
+- production content pages and billing backend
+
+## Local Visual Testing
+
+Website:
+
+- run `npm run dev:website`
+- open the local Vite URL in the browser
+- check desktop and mobile responsive views
+- if the dev server renders blank, use the static preview script on `http://127.0.0.1:4300`
+
+Mini App:
+
+- run `npm run dev:miniapp`
+- expose the local port through `cloudflared` or `ngrok`
+- put the generated `https` URL into `MINIAPP_URL` in `.env`
+- restart the Python bot; it will set the Telegram menu button automatically
+- open the bot in Telegram and launch the Mini App there
+- the Mini App dev server runs on `http://localhost:3001`
+- if the dev server renders blank in Telegram Desktop or local Windows browsers, use the static preview script instead of Vite dev mode
+
+One-command helper for Windows:
+
+```powershell
+powershell -ExecutionPolicy Bypass -File .\scripts\start-miniapp-public.ps1
+```
+
+This helper:
+
+- starts the Mini App dev server
+- detects the actual local port automatically
+- starts a public `cloudflared` tunnel
+- writes the public `MINIAPP_URL` back into `.env`
+- prints the next command to sync the Telegram button
+
+Example with `cloudflared`:
+
+```powershell
+npm run dev:miniapp
+cloudflared tunnel --url http://localhost:3001
+```
+
+Then copy the generated `https://...trycloudflare.com` URL into `MINIAPP_URL` and restart:
+
+```powershell
+python -m app.bot.main
+```
+
+If you only want to refresh the Telegram button after changing the URL, run:
+
+```powershell
+python -m app.bot.sync_telegram_ui
+```
+
+Mobile app:
+
+- run `npm run dev:mobile`
+- Expo starts on port `8082`
+- open in Android emulator or on a real Android device through Expo
+- current stage is a UI shell for the three main screens
+- the real VPN tunnel layer should be added next as native Android functionality
+
+## Why Mini App Exists If The Bot Already Works
+
+The bot is still useful for commands, notifications, and fallback actions.
+
+The Mini App exists for:
+
+- better account UX
+- plans and billing views
+- profile and preferences
+- support entry points
+- guided onboarding without long chat flows
+
+The Mini App should not become the VPN client. The actual VPN connect flow belongs in the mobile app.
+
+## Sharing With A Friend
+
+Your friend can open the same Mini App if all of these are true:
+
+- the `MINIAPP_URL` points to a public `https` address
+- the Mini App dev server is still running on your machine
+- the public tunnel is still alive
+- the Telegram bot menu button has been synced with `python -m app.bot.sync_telegram_ui`
+
+For short-term testing, the `cloudflared` tunnel is enough.
+
+For a stable shared setup, deploy `apps/miniapp` to a static host such as Cloudflare Pages, Vercel, or Netlify and set `MINIAPP_URL` to that permanent domain instead of a temporary `trycloudflare` URL.
+
+## What Comes Next
+
+- connect Mini App to backend APIs and Telegram WebApp auth validation
+- turn the website shell into a full public product site
+- convert the mobile shell into a real Android VPN client with native tunnel integration
+# Stable Mini App URL
+
+Temporary tunnels like `trycloudflare`, `localhost.run`, or `loca.lt` are acceptable only for quick local previews.
+For Telegram Mini App usage they are not stable enough and may break at any moment when the local process, tunnel, or provider endpoint changes.
+
+The repository now includes a GitHub Pages workflow that publishes the Telegram-compatible static Mini App from:
+
+`apps/miniapp/compat`
+
+Expected long-lived URL after GitHub Pages is enabled for the repository:
+
+`https://insanekinge.github.io/anny-vpn/`
+
+After the workflow runs successfully, use that URL as `MINIAPP_URL` and set the same value in `@BotFather -> Bot Settings -> Menu Button`.
