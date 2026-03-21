@@ -1,0 +1,84 @@
+.app-frame {
+  position: relative;
+  min-height: 100vh;
+  background: var(--ally-hero-gradient);
+  overflow: hidden;
+}
+
+.app-frame__backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 16% 14%, rgba(182, 153, 230, 0.14), transparent 28%),
+    radial-gradient(circle at 84% 18%, rgba(124, 74, 204, 0.16), transparent 24%);
+  pointer-events: none;
+}
+
+.app-frame__layout {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.3fr) minmax(320px, 420px);
+  gap: 32px;
+  padding: 40px;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+.app-frame__content {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.app-frame__hero {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 780px;
+}
+
+.app-frame__eyebrow {
+  width: fit-content;
+  padding: 8px 14px;
+  border: 1px solid var(--ally-border);
+  border-radius: var(--ally-radius-pill);
+  background: var(--ally-background-overlay);
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ally-accent-soft);
+}
+
+.app-frame__title {
+  margin: 0;
+  font-family: var(--ally-font-display);
+  font-size: clamp(2.6rem, 6vw, 5.6rem);
+  line-height: 1.02;
+  letter-spacing: -0.04em;
+}
+
+.app-frame__description {
+  margin: 0;
+  max-width: 640px;
+  font-size: 1.08rem;
+  line-height: 1.7;
+  color: var(--ally-text-muted);
+}
+
+.app-frame__sidebar {
+  position: sticky;
+  top: 28px;
+  align-self: start;
+}
+
+@media (max-width: 1080px) {
+  .app-frame__layout {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .app-frame__sidebar {
+    position: static;
+  }
+}

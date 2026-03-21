@@ -1,0 +1,257 @@
+#root {
+  min-height: 100vh;
+}
+
+.miniapp {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  background: var(--ally-hero-gradient);
+  color: var(--ally-text);
+}
+
+.miniapp__device {
+  width: min(100%, 420px);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 22px;
+  background:
+    radial-gradient(circle at top center, rgba(124, 74, 204, 0.16), transparent 32%),
+    var(--ally-background);
+}
+
+.miniapp__header {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.miniapp__header-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.miniapp__brand,
+.miniapp__status,
+.miniapp-badge {
+  display: inline-flex;
+  width: fit-content;
+  padding: 8px 14px;
+  border: 1px solid var(--ally-border);
+  border-radius: var(--ally-radius-pill);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent),
+    rgba(124, 74, 204, 0.14);
+  color: var(--ally-accent-soft);
+  font-family: var(--ally-font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.miniapp__title,
+.miniapp-card__title {
+  margin: 0;
+  font-family: var(--ally-font-display);
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+}
+
+.miniapp__title {
+  font-size: clamp(1.9rem, 7vw, 2.8rem);
+}
+
+.miniapp__subtitle,
+.miniapp-card__text,
+.miniapp-card__hint,
+.miniapp-profile__handle {
+  margin: 0;
+  color: var(--ally-text-muted);
+  line-height: 1.6;
+}
+
+.miniapp__content,
+.miniapp-section {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.miniapp-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  border: 1px solid var(--ally-border);
+  border-radius: 26px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01)),
+    var(--ally-background-overlay);
+  box-shadow: var(--ally-shadow-surface);
+}
+
+.miniapp-card--hero {
+  gap: 18px;
+}
+
+.miniapp-card--compact {
+  gap: 8px;
+}
+
+.miniapp-card--row,
+.miniapp-plan__header,
+.miniapp-profile {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+}
+
+.miniapp-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.miniapp-card__label {
+  font-size: 0.8rem;
+  color: var(--ally-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.miniapp-card__value,
+.miniapp-profile__name,
+.miniapp-profile__id {
+  font-family: var(--ally-font-display);
+}
+
+.miniapp-profile__name {
+  display: block;
+  font-size: 1.28rem;
+}
+
+.miniapp-profile__handle {
+  display: block;
+  margin-top: 6px;
+}
+
+.miniapp-plan--featured {
+  box-shadow: var(--ally-shadow-surface), var(--ally-shadow-glow);
+}
+
+.miniapp-plan__price {
+  font-family: var(--ally-font-display);
+  font-size: 1.8rem;
+  letter-spacing: -0.04em;
+}
+
+.miniapp-plan__list {
+  margin: 0;
+  padding: 0 0 0 18px;
+  display: grid;
+  gap: 10px;
+}
+
+.miniapp-button {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: var(--ally-radius-pill);
+  padding: 15px 22px;
+  font-family: var(--ally-font-body);
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.1;
+  cursor: pointer;
+  transition:
+    transform var(--ally-motion-base),
+    box-shadow var(--ally-motion-base),
+    background-color var(--ally-motion-base),
+    color var(--ally-motion-base);
+}
+
+.miniapp-button::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  border-radius: inherit;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.02) 35%, transparent 70%),
+    radial-gradient(circle at top center, rgba(255, 255, 255, 0.2), transparent 42%);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+.miniapp-button:hover {
+  transform: translateY(-1px);
+}
+
+.miniapp-button--primary {
+  background: var(--ally-gradient);
+  color: var(--ally-color-white);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.24),
+    inset 0 -10px 24px rgba(42, 28, 64, 0.16),
+    0 10px 26px rgba(124, 74, 204, 0.2);
+}
+
+.miniapp-button--ghost {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.02);
+  border-color: var(--ally-border);
+  color: var(--ally-text);
+}
+
+.miniapp__tabs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  padding: 10px;
+  border: 1px solid var(--ally-border);
+  border-radius: 30px;
+  background: var(--ally-background-overlay);
+}
+
+.miniapp__tab {
+  border: 0;
+  border-radius: var(--ally-radius-md);
+  padding: 14px 12px;
+  background: transparent;
+  color: var(--ally-text-muted);
+  font-family: var(--ally-font-body);
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    color var(--ally-motion-base),
+    background-color var(--ally-motion-base),
+    transform var(--ally-motion-base);
+}
+
+.miniapp__tab:hover {
+  transform: translateY(-1px);
+}
+
+.miniapp__tab--active {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), transparent),
+    rgba(124, 74, 204, 0.2);
+  color: var(--ally-accent);
+}
+
+@media (max-width: 520px) {
+  .miniapp__device {
+    width: 100%;
+    padding-bottom: calc(22px + env(safe-area-inset-bottom));
+  }
+
+  .miniapp-grid {
+    grid-template-columns: 1fr;
+  }
+}

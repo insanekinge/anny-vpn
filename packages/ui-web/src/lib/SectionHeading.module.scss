@@ -1,0 +1,25 @@
+.section-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.section-heading--center {
+  text-align: center;
+  align-items: center;
+}
+
+.section-heading__title {
+  margin: 0;
+  font-family: var(--ally-font-display);
+  font-size: clamp(1.6rem, 3vw, 2.8rem);
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.section-heading__description {
+  margin: 0;
+  max-width: 620px;
+  line-height: 1.7;
+  color: var(--ally-text-muted);
+}

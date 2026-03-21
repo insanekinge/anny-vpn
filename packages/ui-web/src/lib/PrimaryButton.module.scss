@@ -1,0 +1,105 @@
+.primary-button {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: var(--ally-radius-pill);
+  padding: 15px 22px;
+  font-family: var(--ally-font-body);
+  font-size: 0.98rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+  cursor: pointer;
+  transition:
+    transform var(--ally-motion-base),
+    box-shadow var(--ally-motion-base),
+    background-color var(--ally-motion-base),
+    border-color var(--ally-motion-base),
+    color var(--ally-motion-base);
+}
+
+.primary-button::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  border-radius: inherit;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.22), rgba(255, 255, 255, 0.02) 35%, transparent 70%),
+    radial-gradient(circle at top center, rgba(255, 255, 255, 0.24), transparent 42%);
+  opacity: 0.9;
+  pointer-events: none;
+  animation: button-breathe 4.8s ease-in-out infinite;
+}
+
+.primary-button::after {
+  content: "";
+  position: absolute;
+  top: -120%;
+  left: -30%;
+  width: 38%;
+  height: 320%;
+  transform: rotate(18deg);
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.22), transparent);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.primary-button:hover {
+  transform: translateY(-1px) scale(1.008);
+}
+
+.primary-button:hover::after {
+  opacity: 1;
+  animation: button-sheen 1.2s ease;
+}
+
+.primary-button:active {
+  transform: translateY(1px) scale(0.995);
+}
+
+.primary-button--primary {
+  background: var(--ally-gradient);
+  color: var(--ally-color-white);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.26),
+    inset 0 -10px 24px rgba(42, 28, 64, 0.18),
+    0 10px 26px rgba(124, 74, 204, 0.2);
+}
+
+.primary-button--ghost {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02)),
+    rgba(255, 255, 255, 0.02);
+  color: var(--ally-text);
+  border: 1px solid var(--ally-border);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 8px 20px rgba(42, 28, 64, 0.06);
+}
+
+.primary-button--wide {
+  width: 100%;
+}
+
+@keyframes button-sheen {
+  from {
+    transform: translateX(-12%) rotate(18deg);
+  }
+  to {
+    transform: translateX(320%) rotate(18deg);
+  }
+}
+
+@keyframes button-breathe {
+  0%,
+  100% {
+    opacity: 0.84;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}

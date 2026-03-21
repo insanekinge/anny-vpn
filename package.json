@@ -1,0 +1,17 @@
+{
+  "name": "allyvpn-monorepo",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev:website": "powershell -ExecutionPolicy Bypass -File .\\scripts\\run-website-local.ps1",
+    "dev:miniapp": "powershell -ExecutionPolicy Bypass -File .\\scripts\\run-miniapp-local.ps1",
+    "dev:miniapp-react": "npm run dev --workspace @allyvpn/miniapp",
+    "build:website": "npm run build --workspace @allyvpn/website",
+    "build:miniapp": "npm run build --workspace @allyvpn/miniapp",
+    "check:web": "npm run build:website && npm run build:miniapp"
+  }
+}

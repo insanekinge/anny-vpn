@@ -23,6 +23,7 @@ class Settings(BaseSettings):
     marzban_password: SecretStr | None = Field(default=None, alias="MARZBAN_PASSWORD")
     marzban_verify_ssl: bool = Field(default=False, alias="MARZBAN_VERIFY_SSL")
     marzban_timeout: int = Field(default=15, alias="MARZBAN_TIMEOUT")
+    miniapp_url: str | None = Field(default=None, alias="MINIAPP_URL")
     support_username: str | None = Field(default=None, alias="SUPPORT_USERNAME")
     admin_telegram_ids_raw: str = Field(default="", alias="ADMIN_TELEGRAM_IDS")
     log_level: str = Field(default="INFO", alias="LOG_LEVEL")

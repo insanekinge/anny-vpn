@@ -1,0 +1,83 @@
+:root {
+  --ally-color-white: #ffffff;
+  --ally-color-violet-primary: #7c4acc;
+  --ally-color-violet-soft: #b699e6;
+  --ally-color-ink: #0f0d12;
+  --ally-color-plum: #2a1c40;
+  --ally-font-display: "Sora", "Segoe UI", sans-serif;
+  --ally-font-body: "Manrope", "Segoe UI", sans-serif;
+  --ally-radius-sm: 14px;
+  --ally-radius-md: 20px;
+  --ally-radius-lg: 28px;
+  --ally-radius-pill: 999px;
+  --ally-shadow-glow: 0 22px 80px rgba(124, 74, 204, 0.32);
+  --ally-shadow-surface: 0 20px 50px rgba(8, 7, 10, 0.32);
+  --ally-motion-base: 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+[data-theme="dark"] {
+  --ally-background: #0f0d12;
+  --ally-background-elevated: #17141c;
+  --ally-background-muted: #1f1b27;
+  --ally-background-overlay: rgba(15, 13, 18, 0.76);
+  --ally-border: rgba(182, 153, 230, 0.18);
+  --ally-text: #ffffff;
+  --ally-text-muted: #b9b1c7;
+  --ally-accent: #7c4acc;
+  --ally-accent-soft: #b699e6;
+  --ally-accent-deep: #2a1c40;
+  --ally-success: #27d17f;
+  --ally-warning: #ffbf47;
+  --ally-gradient: linear-gradient(135deg, #7c4acc 0%, #9c4cf4 48%, #2a1c40 100%);
+  --ally-hero-gradient: radial-gradient(circle at top left, rgba(124, 74, 204, 0.38), transparent 45%),
+    radial-gradient(circle at bottom right, rgba(182, 153, 230, 0.18), transparent 42%),
+    linear-gradient(180deg, #100d16 0%, #0b0910 100%);
+}
+
+[data-theme="light"] {
+  --ally-background: #f7f5fb;
+  --ally-background-elevated: #ffffff;
+  --ally-background-muted: #efe9fa;
+  --ally-background-overlay: rgba(247, 245, 251, 0.84);
+  --ally-border: rgba(42, 28, 64, 0.12);
+  --ally-text: #0f0d12;
+  --ally-text-muted: #63577a;
+  --ally-accent: #7c4acc;
+  --ally-accent-soft: #b699e6;
+  --ally-accent-deep: #2a1c40;
+  --ally-success: #14b86f;
+  --ally-warning: #f1a907;
+  --ally-gradient: linear-gradient(135deg, #7c4acc 0%, #b699e6 55%, #2a1c40 100%);
+  --ally-hero-gradient: radial-gradient(circle at top left, rgba(124, 74, 204, 0.22), transparent 42%),
+    radial-gradient(circle at bottom right, rgba(182, 153, 230, 0.18), transparent 42%),
+    linear-gradient(180deg, #fcfbff 0%, #f2eef9 100%);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family: var(--ally-font-body);
+  background: var(--ally-background);
+  color: var(--ally-text);
+  transition:
+    background-color var(--ally-motion-base),
+    color var(--ally-motion-base);
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

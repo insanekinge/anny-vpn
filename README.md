@@ -3,7 +3,7 @@
 AllyVPN now consists of two layers that evolve in parallel:
 
 - the existing Python backend and Telegram bot in `app/`
-- a frontend monorepo for the public website, Telegram Mini App, and mobile client UI
+- a frontend monorepo for the public website and Telegram Mini App
 
 The repository is organized so frontend work can move fast without breaking the current Marzban-integrated backend.
 
@@ -13,8 +13,7 @@ The repository is organized so frontend work can move fast without breaking the 
 - aiogram 3.26.0
 - FastAPI 0.118.0
 - SQLAlchemy 2.0.48
-- React 18 for website and Mini App
-- Expo / React Native for the mobile shell
+- React for website and Mini App
 - npm workspaces for monorepo management
 - shared design tokens and web UI packages in `packages/`
 
@@ -41,7 +40,6 @@ app/
 apps/
   website/
   miniapp/
-  mobile/
 packages/
   design-system/
   ui-web/
@@ -148,12 +146,6 @@ Stable static preview with a public temporary URL:
 powershell -ExecutionPolicy Bypass -File .\scripts\start-miniapp-static.ps1 -Public
 ```
 
-Run the mobile UI shell:
-
-```powershell
-npm run dev:mobile
-```
-
 Build the web apps:
 
 ```powershell
@@ -166,14 +158,12 @@ Implemented now:
 
 - `apps/website`: premium landing-page shell
 - `apps/miniapp`: Telegram-oriented account shell
-- `apps/mobile`: three-screen mobile UI shell (`Home`, `Access`, `Profile`)
 - `packages/design-system`: tokens, themes, font imports
 - `packages/ui-web`: shared web primitives
 
 Not implemented yet:
 
 - real Telegram WebApp backend validation flow
-- VPN connection engine for the mobile client
 - payment flows
 - production content pages and billing backend
 
@@ -229,14 +219,6 @@ If you only want to refresh the Telegram button after changing the URL, run:
 python -m app.bot.sync_telegram_ui
 ```
 
-Mobile app:
-
-- run `npm run dev:mobile`
-- Expo starts on port `8082`
-- open in Android emulator or on a real Android device through Expo
-- current stage is a UI shell for the three main screens
-- the real VPN tunnel layer should be added next as native Android functionality
-
 ## Why Mini App Exists If The Bot Already Works
 
 The bot is still useful for commands, notifications, and fallback actions.
@@ -248,8 +230,6 @@ The Mini App exists for:
 - profile and preferences
 - support entry points
 - guided onboarding without long chat flows
-
-The Mini App should not become the VPN client. The actual VPN connect flow belongs in the mobile app.
 
 ## Sharing With A Friend
 
@@ -268,7 +248,6 @@ For a stable shared setup, deploy `apps/miniapp` to a static host such as Cloudf
 
 - connect Mini App to backend APIs and Telegram WebApp auth validation
 - turn the website shell into a full public product site
-- convert the mobile shell into a real Android VPN client with native tunnel integration
 # Stable Mini App URL
 
 Temporary tunnels like `trycloudflare`, `localhost.run`, or `loca.lt` are acceptable only for quick local previews.

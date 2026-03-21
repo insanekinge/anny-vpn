@@ -1,0 +1,19 @@
+.glass-panel {
+  border: 1px solid var(--ally-border);
+  border-radius: var(--ally-radius-lg);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.01)),
+    var(--ally-background-overlay);
+  box-shadow: var(--ally-shadow-surface);
+  backdrop-filter: blur(22px);
+  padding: 24px;
+}
+
+.glass-panel--compact {
+  padding: 18px;
+  border-radius: var(--ally-radius-md);
+}
+
+.glass-panel--elevated {
+  box-shadow: var(--ally-shadow-surface), var(--ally-shadow-glow);
+}

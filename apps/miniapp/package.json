@@ -1,0 +1,26 @@
+{
+  "name": "@allyvpn/miniapp",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 3001",
+    "build": "tsc -p tsconfig.json && vite build",
+    "preview": "vite preview --host 0.0.0.0 --port 4174"
+  },
+  "dependencies": {
+    "@allyvpn/design-system": "0.1.0",
+    "@allyvpn/ui-web": "0.1.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-legacy": "^6.1.1",
+    "@vitejs/plugin-react-swc": "^3.7.1",
+    "sass": "^1.89.2",
+    "typescript": "^5.7.3",
+    "vite": "^6.2.4"
+  }
+}

@@ -5,6 +5,13 @@ __pycache__/
 .mypy_cache/
 .ruff_cache/
 .idea/
+node_modules/
+.turbo/
+.expo/
+.runtime/
+dist/
+build/
+coverage/
 *.pyc
 *.pyo
 *.pyd

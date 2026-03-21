@@ -4,471 +4,555 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <title>AllyVPN Mini App</title>
-    <link rel="stylesheet" href="./app.css" />
+    <link rel="stylesheet" href="./app.css?v=20260321-portal-8" />
   </head>
   <body>
-    <div class="miniapp">
-      <div class="miniapp__device">
-        <main class="miniapp__content">
-          <section class="screen screen--home" data-screen="home">
-            <header class="topbar">
-              <div class="brand">
-                <span class="brand__logo">
-                  <svg class="icon" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M12 2.5 5.5 4.9v6.2c0 4.2 2.7 7.9 6.5 9.1 3.8-1.2 6.5-4.9 6.5-9.1V4.9L12 2.5Z"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </span>
-                <span class="brand__name">AllyVPN</span>
+    <div class="app">
+      <header class="desktop-header">
+        <div class="brand">
+          <span class="brand__mark">A</span>
+          <div>
+            <strong class="brand__name">AllyVPN</strong>
+            <span class="brand__caption">Access Portal</span>
+          </div>
+        </div>
+        <div class="desktop-header__meta">
+          <span class="live-pill"><span class="live-pill__dot"></span>Онлайн</span>
+          <span class="desktop-header__label">Личный кабинет</span>
+        </div>
+      </header>
+
+      <nav class="desktop-section-nav" aria-label="Разделы портала">
+        <button class="desktop-section-nav__item desktop-section-nav__item--active" type="button" data-desktop-section="overview">Обзор</button>
+        <button class="desktop-section-nav__item" type="button" data-desktop-section="connection">Подключение</button>
+        <button class="desktop-section-nav__item" type="button" data-desktop-section="guides">Инструкции</button>
+        <button class="desktop-section-nav__item" type="button" data-desktop-section="profile">Профиль</button>
+      </nav>
+
+      <main class="desktop-portal">
+        <section class="desktop-main">
+          <article class="card hero-card desktop-anchor" id="desktop-overview" data-desktop-anchor="overview">
+            <div class="hero-card__top">
+              <div class="badge-row">
+                <span class="badge badge--active" data-bind="status_badge">Активна</span>
+                <span class="badge">VLESS</span>
               </div>
-              <span class="status-pill" id="subscription-pill">Подписка активна</span>
-            </header>
-
-            <article class="hero-card">
-              <div class="hero-card__copy">
-                <span class="hero-card__eyebrow">Привет, John</span>
-                <h1 class="hero-card__title">Ваш личный кабинет AllyVPN готов</h1>
-                <p class="hero-card__text">
-                  Здесь виден статус подписки, доступ к серверам, поддержка и все ключевые настройки аккаунта.
-                </p>
-                <div class="hero-card__meta">
-                  <div class="meta-chip">
-                    <span class="meta-chip__label">Подписка</span>
-                    <strong class="meta-chip__value" id="subscription-status-copy">Активна до марта 2027</strong>
-                  </div>
-                  <div class="meta-chip meta-chip--subtle">
-                    <span class="meta-chip__label">Пользователь</span>
-                    <strong class="meta-chip__value">@johanderson</strong>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <section class="summary-grid">
-              <article class="card card--feature" id="subscription">
-                <div class="feature-card__icon">
-                  <svg class="icon icon--small" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="m7 20 5-3 5 3-1.6-5 4.1-3.3-5.2-.2L12 6l-2.3 5.5-5.2.2 4.1 3.3L7 20Z"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </div>
-                <div class="feature-card__copy">
-                  <strong class="feature-card__title">Премиум план</strong>
-                  <p class="feature-card__text">Продление в марте 2027</p>
-                </div>
-                <button type="button" class="link-button" data-target-tab="profile" data-target-section="billing-section">
-                  Управлять
-                </button>
-              </article>
-
-              <article class="card card--feature" id="support">
-                <div class="feature-card__icon feature-card__icon--soft">
-                  <svg class="icon icon--small" viewBox="0 0 24 24" aria-hidden="true">
-                    <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2" />
-                    <path
-                      d="M9.8 9.4a2.4 2.4 0 0 1 4.4 1.2c0 1.4-1.5 2-2.2 2.6-.5.5-.6.8-.6 1.4"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                    <circle cx="12" cy="17.2" r="1" fill="currentColor" />
-                  </svg>
-                </div>
-                <div class="feature-card__copy">
-                  <strong class="feature-card__title">Поддержка</strong>
-                  <p class="feature-card__text">Помощь по подключению и доступу</p>
-                </div>
-                <button type="button" class="link-button" data-target-tab="profile" data-target-section="support-section">
-                  Открыть
-                </button>
-              </article>
-            </section>
-          </section>
-
-          <section class="screen screen--access" data-screen="access" hidden>
-            <header class="section-header">
-              <h1 class="section-header__title">Доступ к серверам</h1>
-              <p class="section-header__subtitle">Выберите сервер с оптимальным пингом и быстро обновите список локаций.</p>
-            </header>
-
-            <div class="action-grid">
-              <button type="button" class="card action-card" id="refresh-servers">
-                <span class="action-card__icon">
-                  <svg class="icon icon--small" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M18.4 8A7 7 0 0 0 6 8.9M5.6 16A7 7 0 0 0 18 15.1"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                    />
-                    <path
-                      d="M18 4.8V8h-3.2M6 19.2V16h3.2"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </span>
-                <span class="action-card__copy">
-                  <strong>Обновить</strong>
-                  <span id="refresh-status">Обновить список</span>
-                </span>
-              </button>
-
-              <button type="button" class="card action-card" id="guide-toggle">
-                <span class="action-card__icon">
-                  <svg class="icon icon--small" viewBox="0 0 24 24" aria-hidden="true">
-                    <path
-                      d="M8 4.5h8A2.5 2.5 0 0 1 18.5 7v10A2.5 2.5 0 0 1 16 19.5H8A2.5 2.5 0 0 1 5.5 17V7A2.5 2.5 0 0 1 8 4.5Z"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                    />
-                    <path d="M9 9h6M9 12h6M9 15h4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                  </svg>
-                </span>
-                <span class="action-card__copy">
-                  <strong>Гайд</strong>
-                  <span>Помощь с настройкой</span>
-                </span>
-              </button>
+              <span class="hero-card__hint" data-bind="hero_helper">Ваш VPN готов к использованию</span>
             </div>
-
-            <article class="card guide-card" id="guide-card">
-              <div class="guide-card__header">
-                <svg class="icon icon--small guide-card__icon" viewBox="0 0 24 24" aria-hidden="true">
-                  <path
-                    d="M8 4.5h8A2.5 2.5 0 0 1 18.5 7v10A2.5 2.5 0 0 1 16 19.5H8A2.5 2.5 0 0 1 5.5 17V7A2.5 2.5 0 0 1 8 4.5Z"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  />
-                </svg>
-                <strong class="guide-card__title">Быстрый старт</strong>
+            <h1 class="hero-card__title">Управляйте доступом и подключением в одном месте</h1>
+            <p class="hero-card__text">Статус подписки, импорт в приложение, конфиги, инструкции и диагностика доступны прямо из Mini App.</p>
+            <div class="summary-grid">
+              <div class="summary-item">
+                <span class="summary-item__label">Тариф</span>
+                <strong data-bind="plan_name">Pro 90 дней</strong>
               </div>
-              <ol class="guide-card__list">
-                <li>Выберите сервер с оптимальным пингом.</li>
-                <li>Откройте профиль, если нужно проверить подписку или получить помощь.</li>
-                <li>Обновите список серверов, если хотите пересчитать задержку.</li>
-              </ol>
-            </article>
+              <div class="summary-item">
+                <span class="summary-item__label">Активен до</span>
+                <strong data-bind="expires_at">15 июня 2026</strong>
+              </div>
+              <div class="summary-item summary-item--wide">
+                <span class="summary-item__label">Marzban username</span>
+                <strong data-bind="marzban_username">user_469102712</strong>
+              </div>
+            </div>
+            <div class="usage">
+              <div class="usage__row">
+                <span>Использовано трафика</span>
+                <strong><span data-bind="traffic_used">45.2</span> / <span data-bind="traffic_total">100</span> ГБ</strong>
+              </div>
+              <div class="usage__bar"><span id="desktop-usage-bar"></span></div>
+              <div class="usage__foot">
+                <span data-bind="days_left_copy">Осталось 87 дней подписки</span>
+                <span class="badge badge--warn" id="desktop-warning" hidden>Истекает скоро</span>
+              </div>
+            </div>
+          </article>
 
-            <label class="search-field">
-              <svg class="icon icon--small search-field__icon" viewBox="0 0 24 24" aria-hidden="true">
-                <circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="2" />
-                <path d="m16 16 4 4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-              </svg>
-              <input type="text" id="server-search" placeholder="Поиск серверов, стран или городов..." />
-            </label>
+          <div class="action-grid">
+            <button class="btn btn--primary" type="button" data-action="connect">Подключить</button>
+            <button class="btn" type="button" data-copy="subscription_url">Скопировать URL</button>
+            <button class="btn" type="button" data-action="renew">Продлить</button>
+            <button class="btn" type="button" data-action="support">Поддержка</button>
+          </div>
 
-            <div class="server-groups">
-              <section class="server-group" data-group-name="us united states new york los angeles chicago">
-                <div class="server-group__title-row">
-                  <h2 class="server-group__title">US United States</h2>
-                  <span class="server-group__count">(3)</span>
+          <article class="card recommend-card desktop-anchor" id="desktop-connection" data-desktop-anchor="connection">
+            <div class="badge-row">
+              <span class="badge badge--accent">Рекомендуем</span>
+              <span class="badge">VLESS</span>
+            </div>
+            <h2 class="section-title">Рекомендуемое подключение</h2>
+            <h3 class="recommend-card__title" data-bind="recommended_title">AllyVPN VLESS</h3>
+            <p class="recommend-card__text" data-bind="recommended_reason">Оптимальный баланс скорости и стабильности. Работает в большинстве сетей.</p>
+            <div class="stack">
+              <button class="btn btn--primary" type="button" data-action="connect-recommended">Открыть в приложении</button>
+              <button class="btn" type="button" data-copy="recommended_config">Скопировать конфиг</button>
+            </div>
+          </article>
+
+          <article class="card">
+            <h2 class="section-title">Детали подключения</h2>
+            <div class="accordion">
+              <section class="accordion__item">
+                <button class="accordion__toggle" type="button" data-accordion-target="desktop-subscription">
+                  <span>Subscription URL</span>
+                  <span class="accordion__caret">⌄</span>
+                </button>
+                <div class="accordion__panel" id="desktop-subscription" hidden>
+                  <div class="secret" data-bind="subscription_url_preview">https://sub.allyvpn.com/api/v1/client/subscribe?token=...</div>
+                  <div class="inline-actions">
+                    <button class="inline-btn" type="button" data-copy="subscription_url">Скопировать</button>
+                    <button class="inline-btn" type="button" data-reveal="subscription_url">Показать</button>
+                  </div>
                 </div>
-
-                <article class="server-card server-card--active" data-server-name="new york" data-location="Нью-Йорк, Соединённые Штаты">
-                  <div class="server-card__main">
-                    <div class="server-card__icon">
-                      <svg class="icon icon--server" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M4.5 9.5C6.8 7.5 9.4 6.5 12 6.5s5.2 1 7.5 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                        <path d="M7.7 12.8A6.3 6.3 0 0 1 12 11.2c1.5 0 3 .5 4.3 1.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                        <path d="M10.4 16a2.5 2.5 0 0 1 3.2 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                        <circle cx="12" cy="18.2" r="1.2" fill="currentColor" />
-                      </svg>
-                    </div>
-                    <div class="server-card__copy">
-                      <strong class="server-card__title">New York #1</strong>
-                      <span class="server-card__subtitle">New York</span>
-                    </div>
-                  </div>
-                  <div class="server-card__meta">
-                    <strong class="server-card__ping server-card__ping--good">24ms</strong>
-                    <span>Ping</span>
-                  </div>
-                </article>
-
-                <article class="server-card" data-server-name="los angeles" data-location="Лос-Анджелес, Соединённые Штаты">
-                  <div class="server-card__main">
-                    <div class="server-card__icon server-card__icon--muted">
-                      <svg class="icon icon--server" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M4.5 9.5C6.8 7.5 9.4 6.5 12 6.5s5.2 1 7.5 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                        <path d="M7.7 12.8A6.3 6.3 0 0 1 12 11.2c1.5 0 3 .5 4.3 1.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                        <path d="M10.4 16a2.5 2.5 0 0 1 3.2 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                        <circle cx="12" cy="18.2" r="1.2" fill="currentColor" />
-                      </svg>
-                    </div>
-                    <div class="server-card__copy">
-                      <strong class="server-card__title">Los Angeles #1</strong>
-                      <span class="server-card__subtitle">Los Angeles</span>
-                    </div>
-                  </div>
-                  <div class="server-card__meta">
-                    <strong class="server-card__ping server-card__ping--good">18ms</strong>
-                    <span>Ping</span>
-                  </div>
-                </article>
-
-                <article class="server-card" data-server-name="chicago" data-location="Чикаго, Соединённые Штаты">
-                  <div class="server-card__main">
-                    <div class="server-card__icon server-card__icon--muted">
-                      <svg class="icon icon--server" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M4.5 9.5C6.8 7.5 9.4 6.5 12 6.5s5.2 1 7.5 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                        <path d="M7.7 12.8A6.3 6.3 0 0 1 12 11.2c1.5 0 3 .5 4.3 1.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                        <path d="M10.4 16a2.5 2.5 0 0 1 3.2 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                        <circle cx="12" cy="18.2" r="1.2" fill="currentColor" />
-                      </svg>
-                    </div>
-                    <div class="server-card__copy">
-                      <strong class="server-card__title">Chicago #1</strong>
-                      <span class="server-card__subtitle">Chicago</span>
-                    </div>
-                  </div>
-                  <div class="server-card__meta">
-                    <strong class="server-card__ping server-card__ping--good">28ms</strong>
-                    <span>Ping</span>
-                  </div>
-                </article>
               </section>
-
-              <section class="server-group" data-group-name="gb united kingdom london">
-                <div class="server-group__title-row">
-                  <h2 class="server-group__title">GB United Kingdom</h2>
-                  <span class="server-group__count">(2)</span>
+              <section class="accordion__item">
+                <button class="accordion__toggle" type="button" data-accordion-target="desktop-config">
+                  <span>Рекомендуемый конфиг</span>
+                  <span class="accordion__caret">⌄</span>
+                </button>
+                <div class="accordion__panel" id="desktop-config" hidden>
+                  <div class="secret" data-bind="recommended_config_preview">vless://user@allyvpn.com:443?security=tls&type=ws...</div>
+                  <div class="inline-actions">
+                    <button class="inline-btn" type="button" data-copy="recommended_config">Скопировать</button>
+                    <button class="inline-btn" type="button" data-reveal="recommended_config">Показать</button>
+                  </div>
                 </div>
-
-                <article class="server-card" data-server-name="london" data-location="Лондон, Великобритания">
-                  <div class="server-card__main">
-                    <div class="server-card__icon server-card__icon--muted">
-                      <svg class="icon icon--server" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M4.5 9.5C6.8 7.5 9.4 6.5 12 6.5s5.2 1 7.5 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                        <path d="M7.7 12.8A6.3 6.3 0 0 1 12 11.2c1.5 0 3 .5 4.3 1.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                        <path d="M10.4 16a2.5 2.5 0 0 1 3.2 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                        <circle cx="12" cy="18.2" r="1.2" fill="currentColor" />
-                      </svg>
-                    </div>
-                    <div class="server-card__copy">
-                      <strong class="server-card__title">London #1</strong>
-                      <span class="server-card__subtitle">London</span>
-                    </div>
+              </section>
+              <section class="accordion__item">
+                <button class="accordion__toggle" type="button" data-accordion-target="desktop-alt">
+                  <span>Альтернативные конфиги</span>
+                  <span class="accordion__caret">⌄</span>
+                </button>
+                <div class="accordion__panel" id="desktop-alt" hidden>
+                  <div class="alt-list">
+                    <div class="alt-row"><span class="secret" data-bind="alt_vmess_preview">vmess://eyJh...</span><button class="icon-btn" type="button" data-copy="vmess_config">Копировать</button></div>
+                    <div class="alt-row"><span class="secret" data-bind="alt_trojan_preview">trojan://password@server.allyvpn.com:443?...</span><button class="icon-btn" type="button" data-copy="trojan_config">Копировать</button></div>
                   </div>
-                  <div class="server-card__meta">
-                    <strong class="server-card__ping server-card__ping--warn">89ms</strong>
-                    <span>Ping</span>
-                  </div>
-                </article>
-
-                <article class="server-card" data-server-name="london two" data-location="Лондон, Великобритания">
-                  <div class="server-card__main">
-                    <div class="server-card__icon server-card__icon--muted">
-                      <svg class="icon icon--server" viewBox="0 0 24 24" aria-hidden="true">
-                        <path d="M4.5 9.5C6.8 7.5 9.4 6.5 12 6.5s5.2 1 7.5 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                        <path d="M7.7 12.8A6.3 6.3 0 0 1 12 11.2c1.5 0 3 .5 4.3 1.6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                        <path d="M10.4 16a2.5 2.5 0 0 1 3.2 0" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                        <circle cx="12" cy="18.2" r="1.2" fill="currentColor" />
-                      </svg>
-                    </div>
-                    <div class="server-card__copy">
-                      <strong class="server-card__title">London #2</strong>
-                      <span class="server-card__subtitle">London</span>
-                    </div>
-                  </div>
-                  <div class="server-card__meta">
-                    <strong class="server-card__ping server-card__ping--warn">91ms</strong>
-                    <span>Ping</span>
-                  </div>
-                </article>
+                </div>
               </section>
             </div>
+          </article>
+
+          <section class="proto-block">
+            <h2 class="section-title">Доступные протоколы</h2>
+            <div class="proto-grid">
+              <article class="proto-card proto-card--recommended">
+                <div class="proto-card__head"><strong>VLESS</strong><span class="badge badge--accent">Рекомендуем</span></div>
+                <p>Лёгкий и быстрый протокол. Отлично работает в большинстве сетей.</p>
+                <button class="proto-card__button" type="button" data-copy="recommended_config">Копировать</button>
+              </article>
+              <article class="proto-card">
+                <div class="proto-card__head"><strong>VMess</strong></div>
+                <p>Классический протокол V2Ray с высокой совместимостью.</p>
+                <button class="proto-card__button" type="button" data-copy="vmess_config">Копировать</button>
+              </article>
+              <article class="proto-card">
+                <div class="proto-card__head"><strong>Trojan</strong></div>
+                <p>Маскируется под HTTPS и подходит для сложных сетей.</p>
+                <button class="proto-card__button" type="button" data-copy="trojan_config">Копировать</button>
+              </article>
+              <article class="proto-card">
+                <div class="proto-card__head"><strong>Shadowsocks</strong></div>
+                <p>Проверенный временем протокол с широкой поддержкой.</p>
+                <button class="proto-card__button" type="button" data-copy="shadowsocks_config">Копировать</button>
+              </article>
+            </div>
           </section>
+        </section>
 
-          <section class="screen screen--profile" data-screen="profile" hidden>
-            <header class="section-header">
-              <h1 class="section-header__title">Профиль</h1>
-              <p class="section-header__subtitle">Управляйте аккаунтом, подпиской и настройками интерфейса</p>
-            </header>
-
-            <article class="profile-hero">
-              <div class="profile-hero__avatar">
-                <svg class="icon icon--avatar" viewBox="0 0 24 24" aria-hidden="true">
-                  <circle cx="12" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="2" />
-                  <path d="M5.5 18c1.7-3 4-4.5 6.5-4.5S16.8 15 18.5 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                </svg>
+        <aside class="desktop-side">
+          <article class="card quick-card quick-card--desktop">
+            <h2 class="section-title">Быстрый импорт</h2>
+            <div class="quick-card__row">
+              <div class="qr">
+                <img
+                  class="qr__image"
+                  src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Fsub.allyvpn.com%2Fapi%2Fv1%2Fclient%2Fsubscribe%3Ftoken%3Da1ly-vpn-portal-secure-token"
+                  alt="QR код AllyVPN"
+                  loading="lazy"
+                />
               </div>
-              <div class="profile-hero__content">
-                <strong class="profile-hero__name">John Anderson</strong>
-                <span class="profile-hero__handle">@johanderson</span>
-                <div class="profile-hero__meta">
-                  <div>
-                    <span class="profile-hero__label">С нами с</span>
-                    <strong class="profile-hero__value">Март 2025</strong>
-                  </div>
-                  <div>
-                    <span class="profile-hero__label">ID аккаунта</span>
-                    <strong class="profile-hero__value">#AL-48291</strong>
-                  </div>
+              <div>
+                <h3 class="quick-card__title">Сканируйте QR-код</h3>
+                <p class="quick-card__text">Откройте приложение и импортируйте подписку автоматически.</p>
+              </div>
+            </div>
+            <div class="inline-actions">
+              <button class="inline-btn" type="button" data-copy="subscription_url">Скопировать ссылку</button>
+              <button class="inline-btn" type="button" data-action="open-guide">Инструкция</button>
+            </div>
+          </article>
+
+          <article class="card billing-card billing-card--desktop">
+            <div class="billing-card__head">
+              <span class="badge">Биллинг</span>
+              <strong class="billing-card__title">Планы AllyVPN</strong>
+            </div>
+            <div class="plan-grid">
+              <article class="plan-card plan-card--trial">
+                <div class="plan-card__top">
+                  <strong>Free Trial</strong>
+                  <span class="plan-card__price">0 ₽</span>
                 </div>
-              </div>
+                <p class="plan-card__copy">7 дней бесплатно для знакомства с сервисом.</p>
+                <ul class="plan-card__list">
+                  <li>7 дней доступа</li>
+                  <li>1 устройство</li>
+                  <li>Базовая поддержка</li>
+                </ul>
+              </article>
+              <article class="plan-card plan-card--active">
+                <div class="plan-card__top">
+                  <strong>Стандарт</strong>
+                  <span class="plan-card__price">300 ₽/мес</span>
+                </div>
+                <p class="plan-card__copy">Основной тариф для ежедневного использования.</p>
+                <ul class="plan-card__list">
+                  <li>Все основные протоколы</li>
+                  <li>До 3 устройств</li>
+                  <li>Поддержка в чате</li>
+                </ul>
+              </article>
+              <article class="plan-card plan-card--plus">
+                <div class="plan-card__top">
+                  <strong>Plus</strong>
+                  <span class="plan-card__price">500 ₽/мес</span>
+                </div>
+                <p class="plan-card__copy">Премиальные серверы и приоритетная поддержка.</p>
+                <ul class="plan-card__list">
+                  <li>Лучшие локации</li>
+                  <li>До 5 устройств</li>
+                  <li>Приоритетный саппорт</li>
+                </ul>
+              </article>
+            </div>
+          </article>
+
+          <article class="card info-card info-card--desktop">
+            <span class="badge">Рекомендуемое приложение</span>
+            <h3 class="info-card__title" id="desktop-app-name">Hiddify</h3>
+            <p class="info-card__text" id="desktop-app-copy">Лучше всего подходит для вашего устройства и быстрее импортирует ссылку подписки.</p>
+            <button class="btn btn--primary" type="button" id="desktop-open-guide">Открыть инструкцию</button>
+          </article>
+
+          <section class="side-list side-list--guides desktop-anchor" id="desktop-guides" data-desktop-anchor="guides">
+            <h2 class="section-title">Инструкции по настройке</h2>
+            <article class="card guide">
+              <div class="guide__head"><strong>Hiddify</strong><span class="mini-badges"><span>Android</span><span>iOS</span></span></div>
+              <ol><li>Скачайте приложение.</li><li>Нажмите «Добавить профиль».</li><li>Вставьте ссылку или сканируйте QR.</li></ol>
+              <button class="guide__button" type="button" data-guide="hiddify">Открыть инструкцию</button>
             </article>
-
-            <div class="profile-section" id="billing-section">
-              <h2 class="profile-section__title">Подписка</h2>
-
-              <article class="card row-card">
-                <div class="row-card__main">
-                  <div class="row-card__icon">
-                    <svg class="icon icon--small" viewBox="0 0 24 24" aria-hidden="true">
-                      <path d="m7 20 5-3 5 3-1.6-5 4.1-3.3-5.2-.2L12 6l-2.3 5.5-5.2.2 4.1 3.3L7 20Z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" />
-                    </svg>
-                  </div>
-                  <div class="row-card__copy">
-                    <strong class="row-card__title">Премиум план</strong>
-                    <p class="row-card__text">Активна • Продление в марте 2027</p>
-                  </div>
-                </div>
-                <button type="button" class="link-button" data-action="billing-view">Управлять</button>
-              </article>
-
-              <article class="card row-card">
-                <div class="row-card__main">
-                  <div class="row-card__icon">
-                    <svg class="icon icon--small" viewBox="0 0 24 24" aria-hidden="true">
-                      <rect x="4.5" y="6.5" width="15" height="11" rx="2.5" fill="none" stroke="currentColor" stroke-width="2" />
-                      <path d="M4.5 10.5h15" fill="none" stroke="currentColor" stroke-width="2" />
-                    </svg>
-                  </div>
-                  <div class="row-card__copy">
-                    <strong class="row-card__title">Биллинг</strong>
-                    <p class="row-card__text">Способы оплаты и история платежей</p>
-                  </div>
-                </div>
-                <button type="button" class="link-button" data-action="billing-view">Открыть</button>
-              </article>
-            </div>
-
-            <div class="profile-section" id="settings-section">
-              <h2 class="profile-section__title">Настройки</h2>
-
-              <article class="card row-card">
-                <div class="row-card__main">
-                  <div class="row-card__icon">
-                    <svg class="icon icon--small" viewBox="0 0 24 24" aria-hidden="true">
-                      <circle cx="12" cy="12" r="3.2" fill="none" stroke="currentColor" stroke-width="2" />
-                      <path
-                        d="M12 3.8v2.1M12 18.1v2.1M20.2 12h-2.1M5.9 12H3.8M17.8 6.2l-1.5 1.5M7.7 16.3l-1.5 1.5M17.8 17.8l-1.5-1.5M7.7 7.7 6.2 6.2"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      />
-                    </svg>
-                  </div>
-                  <div class="row-card__copy">
-                    <strong class="row-card__title">Тема</strong>
-                    <p class="row-card__text" id="theme-copy">Тёмная тема включена</p>
-                  </div>
-                </div>
-                <button type="button" class="toggle toggle--active" id="theme-toggle" aria-pressed="true">
-                  <span class="toggle__knob"></span>
-                </button>
-              </article>
-
-              <article class="card row-card" id="privacy-section">
-                <div class="row-card__main">
-                  <div class="row-card__icon">
-                    <svg class="icon icon--small" viewBox="0 0 24 24" aria-hidden="true">
-                      <path
-                        d="M12 2.5 5.5 4.9v6.2c0 4.2 2.7 7.9 6.5 9.1 3.8-1.2 6.5-4.9 6.5-9.1V4.9L12 2.5Z"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      />
-                    </svg>
-                  </div>
-                  <div class="row-card__copy">
-                    <strong class="row-card__title">Приватность и безопасность</strong>
-                    <p class="row-card__text">Настройки приватности, безопасности и условий доступа</p>
-                  </div>
-                </div>
-                <button type="button" class="link-button" data-action="privacy-open">Открыть</button>
-              </article>
-            </div>
-
-            <div class="profile-section" id="support-section">
-              <h2 class="profile-section__title">Поддержка</h2>
-
-              <article class="card row-card">
-                <div class="row-card__main">
-                  <div class="row-card__icon">
-                    <svg class="icon icon--small" viewBox="0 0 24 24" aria-hidden="true">
-                      <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2" />
-                      <path
-                        d="M9.8 9.4a2.4 2.4 0 0 1 4.4 1.2c0 1.4-1.5 2-2.2 2.6-.5.5-.6.8-.6 1.4"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                      />
-                      <circle cx="12" cy="17.2" r="1" fill="currentColor" />
-                    </svg>
-                  </div>
-                  <div class="row-card__copy">
-                    <strong class="row-card__title">Поддержка</strong>
-                    <p class="row-card__text">Связаться с поддержкой по доступу и настройке</p>
-                  </div>
-                </div>
-                <button type="button" class="link-button" data-action="support-open">Написать</button>
-              </article>
-            </div>
+            <article class="card guide">
+              <div class="guide__head"><strong>v2rayNG</strong><span class="mini-badges"><span>Android</span></span></div>
+              <ol><li>Установите v2rayNG.</li><li>Выберите импорт из буфера.</li><li>Вставьте конфиг.</li></ol>
+              <button class="guide__button" type="button" data-guide="v2rayng">Открыть инструкцию</button>
+            </article>
+            <article class="card guide">
+              <div class="guide__head"><strong>Streisand</strong><span class="mini-badges"><span>iOS</span><span>macOS</span></span></div>
+              <ol><li>Скачайте приложение.</li><li>Выберите «Добавить».</li><li>Используйте QR или ссылку.</li></ol>
+              <button class="guide__button" type="button" data-guide="streisand">Открыть инструкцию</button>
+            </article>
+            <article class="card guide">
+              <div class="guide__head"><strong>Nekoray</strong><span class="mini-badges"><span>Windows</span><span>Linux</span></span></div>
+              <ol><li>Скачайте Nekoray.</li><li>Откройте Basic Settings.</li><li>Добавьте профиль по ссылке.</li></ol>
+              <button class="guide__button" type="button" data-guide="nekoray">Открыть инструкцию</button>
+            </article>
           </section>
-        </main>
 
-        <nav class="tabbar" aria-label="Навигация">
-          <button type="button" class="tabbar__item tabbar__item--active" data-tab="home">
-            <svg class="icon tabbar__icon" viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5.5 10.5 12 5l6.5 5.5V18a1.5 1.5 0 0 1-1.5 1.5H7A1.5 1.5 0 0 1 5.5 18Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-              <path d="M9.5 19.5V13h5v6.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
-            </svg>
-            <span class="tabbar__label">Главная</span>
-          </button>
-          <button type="button" class="tabbar__item" data-tab="access">
-            <svg class="icon tabbar__icon" viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2" />
-              <path d="M4 12h16M12 4a12 12 0 0 1 0 16M12 4a12 12 0 0 0 0 16" fill="none" stroke="currentColor" stroke-width="2" />
-            </svg>
-            <span class="tabbar__label">Доступ</span>
-          </button>
-          <button type="button" class="tabbar__item" data-tab="profile">
-            <svg class="icon tabbar__icon" viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="12" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="2" />
-              <path d="M5.5 18c1.7-3 4-4.5 6.5-4.5S16.8 15 18.5 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-            </svg>
-            <span class="tabbar__label">Профиль</span>
-          </button>
+          <section class="side-list side-list--diag">
+            <h2 class="section-title">Диагностика</h2>
+            <article class="card diag diag--success"><strong>Подписка доступна</strong><p>Все сервисы работают штатно.</p></article>
+            <article class="card diag diag--accent"><strong>Тариф активен до <span data-bind="expires_at">15 июня 2026</span></strong><p>После этой даты доступ будет приостановлен.</p></article>
+            <article class="card diag"><strong>Если не работает</strong><p>Откройте инструкцию или напишите в поддержку — мы поможем.</p></article>
+          </section>
+
+          <article class="card renew renew--desktop">
+            <strong class="renew__title">Ваш доступ активен до <span data-bind="expires_at">15 июня 2026</span></strong>
+            <p class="renew__text" data-bind="renew_copy">Осталось 87 дней — самое время продлить заранее.</p>
+            <div class="stack">
+              <button class="btn btn--primary" type="button" data-action="renew">Продлить сейчас</button>
+              <button class="btn" type="button" data-action="support">Написать в поддержку</button>
+            </div>
+          </article>
+
+          <article class="card account account--desktop desktop-anchor" id="desktop-profile" data-desktop-anchor="profile">
+            <span class="badge">Профиль</span>
+            <h3 class="account__name" data-bind="user_name">Илья Андреев</h3>
+            <p class="account__handle" data-bind="user_handle">@ilyaally</p>
+            <div class="summary-grid summary-grid--account">
+              <div class="summary-item"><span class="summary-item__label">ID аккаунта</span><strong data-bind="account_id">#AL-48291</strong></div>
+              <div class="summary-item"><span class="summary-item__label">С нами с</span><strong data-bind="member_since">Март 2025</strong></div>
+            </div>
+            <div class="inline-actions">
+              <button class="inline-btn" type="button" data-theme-toggle>Переключить тему</button>
+              <button class="inline-btn" type="button" data-action="privacy">Приватность и безопасность</button>
+            </div>
+          </article>
+        </aside>
+      </main>
+
+      <main class="mobile-app">
+        <section class="screen" data-screen="home">
+          <header class="mobile-topbar">
+            <div class="brand">
+              <span class="brand__mark">A</span>
+              <strong class="brand__name">AllyVPN</strong>
+            </div>
+            <span class="badge" data-bind="status_badge">Активна</span>
+          </header>
+          <article class="card mobile-hero">
+            <span class="badge badge--ghost">Привет, <span data-bind="user_short_name">Илья</span></span>
+            <h1 class="mobile-hero__title">Ваш личный кабинет готов</h1>
+            <p class="mobile-hero__text">Статус подписки, доступ к серверам и поддержка всегда под рукой.</p>
+            <div class="summary-grid summary-grid--mobile">
+              <div class="summary-item"><span class="summary-item__label">Подписка</span><strong data-bind="plan_name">Pro 90 дней</strong></div>
+              <div class="summary-item"><span class="summary-item__label">Активна до</span><strong data-bind="expires_at">15 июня 2026</strong></div>
+              <div class="summary-item summary-item--wide"><span class="summary-item__label">Marzban username</span><strong data-bind="marzban_username">user_469102712</strong></div>
+            </div>
+          </article>
+          <article class="card">
+            <div class="usage__row">
+              <span>Трафик</span>
+              <strong><span data-bind="traffic_used">45.2</span> / <span data-bind="traffic_total">100</span> ГБ</strong>
+            </div>
+            <div class="usage__bar"><span id="mobile-usage-bar"></span></div>
+            <p class="usage__copy" data-bind="days_left_copy">Осталось 87 дней подписки</p>
+          </article>
+          <div class="mobile-links">
+            <article class="card">
+              <strong>Рекомендуемое подключение</strong>
+              <p data-bind="recommended_reason">Оптимальный баланс скорости и стабильности.</p>
+              <button class="inline-btn inline-btn--fill" type="button" data-target-tab="access">Открыть доступ</button>
+            </article>
+            <article class="card">
+              <strong>Поддержка</strong>
+              <p>Быстрый переход к помощи, диагностике и продлению.</p>
+              <button class="inline-btn" type="button" data-action="support">Открыть поддержку</button>
+            </article>
+          </div>
+        </section>
+
+        <section class="screen" data-screen="access" hidden>
+          <header class="section-head">
+            <h1>Доступ</h1>
+            <p>Подключение, импорт, конфиги и инструкции.</p>
+          </header>
+          <article class="card">
+            <div class="badge-row">
+              <span class="badge badge--active" data-bind="status_badge">Активна</span>
+              <span class="badge">VLESS</span>
+            </div>
+            <h2 class="section-title section-title--mobile">Ваш VPN готов к использованию</h2>
+            <div class="summary-grid summary-grid--mobile">
+              <div class="summary-item"><span class="summary-item__label">Тариф</span><strong data-bind="plan_name">Pro 90 дней</strong></div>
+              <div class="summary-item"><span class="summary-item__label">Активен до</span><strong data-bind="expires_at">15 июня 2026</strong></div>
+              <div class="summary-item summary-item--wide"><span class="summary-item__label">Аккаунт</span><strong data-bind="marzban_username">user_469102712</strong></div>
+            </div>
+          </article>
+          <div class="action-grid action-grid--mobile">
+            <button class="btn btn--primary" type="button" data-action="connect">Подключить</button>
+            <button class="btn" type="button" data-copy="subscription_url">Скопировать URL</button>
+            <button class="btn" type="button" data-action="renew">Продлить</button>
+            <button class="btn" type="button" data-action="support">Поддержка</button>
+          </div>
+          <article class="card recommend-card">
+            <div class="badge-row">
+              <span class="badge badge--accent">Рекомендуем</span>
+              <span class="badge">VLESS</span>
+            </div>
+            <h2 class="section-title section-title--mobile" data-bind="recommended_title">AllyVPN VLESS</h2>
+            <p class="recommend-card__text" data-bind="recommended_reason">Оптимальный баланс скорости и стабильности. Работает в большинстве сетей.</p>
+            <div class="stack">
+              <button class="btn btn--primary" type="button" data-action="connect-recommended">Открыть в приложении</button>
+              <button class="btn" type="button" data-copy="recommended_config">Скопировать конфиг</button>
+            </div>
+          </article>
+          <article class="card quick-card">
+            <div class="quick-card__row quick-card__row--mobile">
+              <div class="qr qr--mobile">
+                <img
+                  class="qr__image"
+                  src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=https%3A%2F%2Fsub.allyvpn.com%2Fapi%2Fv1%2Fclient%2Fsubscribe%3Ftoken%3Da1ly-vpn-portal-secure-token"
+                  alt="QR код AllyVPN"
+                  loading="lazy"
+                />
+              </div>
+              <div>
+                <strong class="quick-card__title">Быстрый импорт</strong>
+                <p class="quick-card__text">Скопируйте ссылку или откройте инструкцию.</p>
+              </div>
+            </div>
+            <div class="inline-actions">
+              <button class="inline-btn" type="button" data-copy="subscription_url">Скопировать ссылку</button>
+              <button class="inline-btn" type="button" data-action="open-guide">Инструкция</button>
+            </div>
+          </article>
+          <article class="card">
+            <h2 class="section-title section-title--mobile">Детали подключения</h2>
+            <div class="accordion">
+              <section class="accordion__item">
+                <button class="accordion__toggle" type="button" data-accordion-target="mobile-subscription">
+                  <span>Subscription URL</span>
+                  <span class="accordion__caret">⌄</span>
+                </button>
+                <div class="accordion__panel" id="mobile-subscription" hidden>
+                  <div class="secret" data-bind="subscription_url_preview">https://sub.allyvpn.com/api/v1/client/subscribe?token=...</div>
+                  <div class="inline-actions">
+                    <button class="inline-btn" type="button" data-copy="subscription_url">Скопировать</button>
+                    <button class="inline-btn" type="button" data-reveal="subscription_url">Показать</button>
+                  </div>
+                </div>
+              </section>
+              <section class="accordion__item">
+                <button class="accordion__toggle" type="button" data-accordion-target="mobile-config">
+                  <span>Рекомендуемый конфиг</span>
+                  <span class="accordion__caret">⌄</span>
+                </button>
+                <div class="accordion__panel" id="mobile-config" hidden>
+                  <div class="secret" data-bind="recommended_config_preview">vless://user@allyvpn.com:443?security=tls&type=ws...</div>
+                  <div class="inline-actions">
+                    <button class="inline-btn" type="button" data-copy="recommended_config">Скопировать</button>
+                    <button class="inline-btn" type="button" data-reveal="recommended_config">Показать</button>
+                  </div>
+                </div>
+              </section>
+              <section class="accordion__item">
+                <button class="accordion__toggle" type="button" data-accordion-target="mobile-alt">
+                  <span>Альтернативные конфиги</span>
+                  <span class="accordion__caret">⌄</span>
+                </button>
+                <div class="accordion__panel" id="mobile-alt" hidden>
+                  <div class="alt-list">
+                    <div class="alt-row"><span class="secret" data-bind="alt_vmess_preview">vmess://eyJh...</span><button class="icon-btn" type="button" data-copy="vmess_config">Копировать</button></div>
+                    <div class="alt-row"><span class="secret" data-bind="alt_trojan_preview">trojan://password@server.allyvpn.com:443?...</span><button class="icon-btn" type="button" data-copy="trojan_config">Копировать</button></div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </article>
+          <article class="card">
+            <h2 class="section-title section-title--mobile">Протоколы</h2>
+            <div class="proto-grid proto-grid--mobile">
+              <article class="proto-card proto-card--recommended">
+                <div class="proto-card__head"><strong>VLESS</strong><span class="badge badge--accent">Рекомендуем</span></div>
+                <button class="proto-card__button" type="button" data-copy="recommended_config">Копировать</button>
+              </article>
+              <article class="proto-card">
+                <div class="proto-card__head"><strong>VMess</strong></div>
+                <button class="proto-card__button" type="button" data-copy="vmess_config">Копировать</button>
+              </article>
+            </div>
+          </article>
+          <article class="card">
+            <h2 class="section-title section-title--mobile">Инструкции</h2>
+            <div class="guide-buttons">
+              <button class="guide__button" type="button" data-guide="hiddify">Hiddify</button>
+              <button class="guide__button" type="button" data-guide="v2rayng">v2rayNG</button>
+              <button class="guide__button" type="button" data-guide="streisand">Streisand</button>
+              <button class="guide__button" type="button" data-guide="nekoray">Nekoray</button>
+            </div>
+          </article>
+          <article class="card">
+            <h2 class="section-title section-title--mobile">Диагностика</h2>
+            <div class="diag-list">
+              <div class="diag-list__item diag-list__item--success">Подписка доступна</div>
+              <div class="diag-list__item">Тариф активен до <span data-bind="expires_at">15 июня 2026</span></div>
+              <div class="diag-list__item">Если не работает — откройте инструкцию или поддержку</div>
+            </div>
+          </article>
+        </section>
+
+        <section class="screen" data-screen="profile" hidden>
+          <header class="section-head">
+            <h1>Профиль</h1>
+            <p>Аккаунт, биллинг, тема, безопасность и поддержка.</p>
+          </header>
+          <article class="card profile-card">
+            <span class="badge badge--accent">Профиль</span>
+            <h2 class="profile-card__name" data-bind="user_name">Илья Андреев</h2>
+            <p class="profile-card__handle" data-bind="user_handle">@ilyaally</p>
+            <div class="summary-grid summary-grid--mobile">
+              <div class="summary-item"><span class="summary-item__label">С нами с</span><strong data-bind="member_since">Март 2025</strong></div>
+              <div class="summary-item"><span class="summary-item__label">Account ID</span><strong data-bind="account_id">#AL-48291</strong></div>
+            </div>
+          </article>
+          <article class="card billing-card billing-card--mobile">
+            <div class="billing-card__head">
+              <span class="badge">Биллинг</span>
+              <strong class="billing-card__title">Планы AllyVPN</strong>
+            </div>
+            <div class="plan-grid plan-grid--mobile">
+              <article class="plan-card plan-card--trial">
+                <div class="plan-card__top">
+                  <strong>Free Trial</strong>
+                  <span class="plan-card__price">0 ₽</span>
+                </div>
+                <p class="plan-card__copy">7 дней бесплатно для знакомства с AllyVPN.</p>
+              </article>
+              <article class="plan-card plan-card--active">
+                <div class="plan-card__top">
+                  <strong>Стандарт</strong>
+                  <span class="plan-card__price">300 ₽/мес</span>
+                </div>
+                <p class="plan-card__copy">Основной тариф для ежедневного использования.</p>
+              </article>
+              <article class="plan-card plan-card--plus">
+                <div class="plan-card__top">
+                  <strong>Plus</strong>
+                  <span class="plan-card__price">500 ₽/мес</span>
+                </div>
+                <p class="plan-card__copy">Премиальные серверы и приоритетная поддержка.</p>
+              </article>
+            </div>
+          </article>
+          <article class="card row">
+            <div><strong>Подписка</strong><p data-bind="renew_copy">Осталось 87 дней — можно продлить заранее.</p></div>
+            <button class="inline-btn" type="button" data-action="renew">Управлять</button>
+          </article>
+          <article class="card row">
+            <div><strong>Биллинг</strong><p>История оплат и методы оплаты появятся на следующем этапе.</p></div>
+            <button class="inline-btn" type="button" data-action="billing">Открыть</button>
+          </article>
+          <article class="card row">
+            <div><strong>Тема</strong><p data-theme-copy>Темная тема включена</p></div>
+            <button class="theme-toggle" type="button" data-theme-toggle aria-pressed="true"><span></span></button>
+          </article>
+          <article class="card row">
+            <div><strong>Приватность и безопасность</strong><p>Управление ссылками, безопасностью и доступом.</p></div>
+            <button class="inline-btn" type="button" data-action="privacy">Открыть</button>
+          </article>
+          <article class="card row">
+            <div><strong>Поддержка</strong><p>Напишите в поддержку, если нужна помощь с доступом.</p></div>
+            <button class="inline-btn" type="button" data-action="support">Открыть</button>
+          </article>
+          <article class="card row">
+            <div><strong>Terms & Privacy</strong><p>Юридическая информация и политика конфиденциальности.</p></div>
+            <button class="inline-btn" type="button" data-action="legal">Открыть</button>
+          </article>
+          <button class="ghost-btn" type="button" data-action="signout">Выйти</button>
+        </section>
+
+        <nav class="mobile-tabbar" aria-label="Навигация">
+          <button class="mobile-tabbar__item mobile-tabbar__item--active" type="button" data-tab="home">Главная</button>
+          <button class="mobile-tabbar__item" type="button" data-tab="access">Доступ</button>
+          <button class="mobile-tabbar__item" type="button" data-tab="profile">Профиль</button>
         </nav>
+      </main>
 
-        <div class="toast" id="toast" hidden></div>
+      <div class="toast" id="toast" hidden></div>
+      <div class="modal" id="reveal-modal" hidden>
+        <div class="modal__backdrop" data-close-modal></div>
+        <div class="modal__dialog">
+          <div class="modal__head">
+            <strong id="reveal-title">Данные</strong>
+            <button class="icon-btn" type="button" data-close-modal>Закрыть</button>
+          </div>
+          <pre class="modal__code" id="reveal-content"></pre>
+          <button class="btn btn--primary" type="button" id="reveal-copy">Скопировать</button>
+        </div>
       </div>
     </div>
 
-    <script src="./app.js"></script>
+    <script src="./app.js?v=20260321-portal-8"></script>
   </body>
 </html>
