@@ -1,264 +1,278 @@
-# AllyVPN
-
-AllyVPN now consists of two layers that evolve in parallel:
-
-- the existing Python backend and Telegram bot in `app/`
-- a frontend monorepo for the public website and Telegram Mini App
-
-The repository is organized so frontend work can move fast without breaking the current Marzban-integrated backend.
-
-## Stack
-
-- Python 3.12
-- aiogram 3.26.0
-- FastAPI 0.118.0
-- SQLAlchemy 2.0.48
-- React for website and Mini App
-- npm workspaces for monorepo management
-- shared design tokens and web UI packages in `packages/`
-
-## Shared Design Direction
-
-- Palette: `#ffffff`, `#7c4acc`, `#b699e6`, `#0f0d12`, `#2a1c40`
-- Typography:
-  - Display: `Sora`
-  - Body/UI: `Manrope`
-- Themes:
-  - dark
-  - light
-
-## Repository Structure
-
-```text
-app/
-  api/
-  bot/
-  core/
-  db/
-  integrations/
-  services/
-apps/
-  website/
-  miniapp/
-packages/
-  design-system/
-  ui-web/
-```
-
-## Backend Runtime
-
-Required bot env values:
-
-- `BOT_TOKEN`
-- `MARZBAN_BASE_URL`
-- `MARZBAN_USERNAME`
-- `MARZBAN_PASSWORD`
-
-Additional env values:
-
-- `APP_ENV=production`
-- `BOT_USERNAME=@AllyVPNsbot`
-- `DATABASE_URL=sqlite+aiosqlite:///./allyvpn.db`
-- `MINIAPP_URL=https://your-public-miniapp-url`
-- `SUPPORT_USERNAME=`
-- `ADMIN_TELEGRAM_IDS=123456789,987654321`
-- `LOG_LEVEL=INFO`
-
-## Local Setup
-
-Install backend:
-
-```powershell
-python -m venv .venv
-.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-```
-
-Fill `.env` with real backend credentials:
-
-```env
-BOT_TOKEN=your_real_token_here
-MARZBAN_BASE_URL=https://your-marzban-host
-MARZBAN_USERNAME=admin_username
-MARZBAN_PASSWORD=admin_password
-MINIAPP_URL=https://your-public-miniapp-url
-ADMIN_TELEGRAM_IDS=your_telegram_id
-```
-
-The Telegram token is required for the bot side only:
-
-- `BOT_TOKEN` is required to run the bot and push the Mini App button into Telegram
-- the Mini App frontend itself does not contain the bot token and should never receive it
-
-Install frontend workspaces:
-
-```powershell
-npm install
-```
-
-## Run Commands
-
-Run the Telegram bot:
-
-```powershell
-python -m app.bot.main
-```
-
-Sync Telegram commands and the Mini App button without starting the full backend:
-
-```powershell
-python -m app.bot.sync_telegram_ui
-```
-
-Run the API:
-
-```powershell
-uvicorn app.api.main:app --reload
-```
-
-Run the website:
-
-```powershell
-npm run dev:website
-```
-
-Stable static preview for the website:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\start-website-static.ps1
-```
-
-Run the Mini App locally:
-
-```powershell
-npm run dev:miniapp
-```
-
-Stable static preview for the Mini App:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\start-miniapp-static.ps1
-```
-
-Stable static preview with a public temporary URL:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\start-miniapp-static.ps1 -Public
-```
-
-Build the web apps:
-
-```powershell
-npm run check:web
-```
-
-## Current Frontend Scope
-
-Implemented now:
-
-- `apps/website`: premium landing-page shell
-- `apps/miniapp`: Telegram-oriented account shell
-- `packages/design-system`: tokens, themes, font imports
-- `packages/ui-web`: shared web primitives
-
-Not implemented yet:
-
-- real Telegram WebApp backend validation flow
-- payment flows
-- production content pages and billing backend
-
-## Local Visual Testing
-
-Website:
-
-- run `npm run dev:website`
-- open the local Vite URL in the browser
-- check desktop and mobile responsive views
-- if the dev server renders blank, use the static preview script on `http://127.0.0.1:4300`
-
-Mini App:
-
-- run `npm run dev:miniapp`
-- expose the local port through `cloudflared` or `ngrok`
-- put the generated `https` URL into `MINIAPP_URL` in `.env`
-- restart the Python bot; it will set the Telegram menu button automatically
-- open the bot in Telegram and launch the Mini App there
-- the Mini App dev server runs on `http://localhost:3001`
-- if the dev server renders blank in Telegram Desktop or local Windows browsers, use the static preview script instead of Vite dev mode
-
-One-command helper for Windows:
-
-```powershell
-powershell -ExecutionPolicy Bypass -File .\scripts\start-miniapp-public.ps1
-```
-
-This helper:
-
-- starts the Mini App dev server
-- detects the actual local port automatically
-- starts a public `cloudflared` tunnel
-- writes the public `MINIAPP_URL` back into `.env`
-- prints the next command to sync the Telegram button
-
-Example with `cloudflared`:
-
-```powershell
-npm run dev:miniapp
-cloudflared tunnel --url http://localhost:3001
-```
-
-Then copy the generated `https://...trycloudflare.com` URL into `MINIAPP_URL` and restart:
-
-```powershell
-python -m app.bot.main
-```
-
-If you only want to refresh the Telegram button after changing the URL, run:
-
-```powershell
-python -m app.bot.sync_telegram_ui
-```
-
-## Why Mini App Exists If The Bot Already Works
-
-The bot is still useful for commands, notifications, and fallback actions.
-
-The Mini App exists for:
-
-- better account UX
-- plans and billing views
-- profile and preferences
-- support entry points
-- guided onboarding without long chat flows
-
-## Sharing With A Friend
-
-Your friend can open the same Mini App if all of these are true:
-
-- the `MINIAPP_URL` points to a public `https` address
-- the Mini App dev server is still running on your machine
-- the public tunnel is still alive
-- the Telegram bot menu button has been synced with `python -m app.bot.sync_telegram_ui`
-
-For short-term testing, the `cloudflared` tunnel is enough.
-
-For a stable shared setup, deploy `apps/miniapp` to a static host such as Cloudflare Pages, Vercel, or Netlify and set `MINIAPP_URL` to that permanent domain instead of a temporary `trycloudflare` URL.
-
-## What Comes Next
-
-- connect Mini App to backend APIs and Telegram WebApp auth validation
-- turn the website shell into a full public product site
-# Stable Mini App URL
-
-Temporary tunnels like `trycloudflare`, `localhost.run`, or `loca.lt` are acceptable only for quick local previews.
-For Telegram Mini App usage they are not stable enough and may break at any moment when the local process, tunnel, or provider endpoint changes.
-
-The repository now includes a GitHub Pages workflow that publishes the Telegram-compatible static Mini App from:
-
-`apps/miniapp/compat`
-
-Expected long-lived URL after GitHub Pages is enabled for the repository:
-
-`https://insanekinge.github.io/anny-vpn/`
-
-After the workflow runs successfully, use that URL as `MINIAPP_URL` and set the same value in `@BotFather -> Bot Settings -> Menu Button`.
+diff --git a/C:\Users\sokka\OneDrive\Документы\Playground\anny-vpn\README.md b/C:\Users\sokka\OneDrive\Документы\Playground\anny-vpn\README.md
+new file mode 100644
+--- /dev/null
++++ b/C:\Users\sokka\OneDrive\Документы\Playground\anny-vpn\README.md
+@@ -0,0 +1,273 @@
++# AllyVPN
++
++Сейчас AllyVPN состоит из двух слоёв, которые развиваются параллельно:
++
++- существующий Python backend и Telegram-бот в `app/`
++- frontend-monorepo для публичного сайта и Telegram Mini App
++
++Репозиторий организован так, чтобы фронтенд можно было развивать быстро и независимо, не ломая текущий backend с интеграцией через Marzban.
++
++## Стек
++
++- Python 3.12
++- aiogram 3.26.0
++- FastAPI 0.118.0
++- SQLAlchemy 2.0.48
++- React для сайта и Mini App
++- npm workspaces для управления monorepo
++- общие design tokens и web UI-пакеты в `packages/`
++
++## Общее дизайн-направление
++
++- Палитра: `#ffffff`, `#7c4acc`, `#b699e6`, `#0f0d12`, `#2a1c40`
++- Типографика:
++  - Display: `Sora`
++  - Body/UI: `Manrope`
++- Темы:
++  - dark
++  - light
++
++## Структура репозитория
++
++```text
++app/
++  api/
++  bot/
++  core/
++  db/
++  integrations/
++  services/
++apps/
++  website/
++  miniapp/
++packages/
++  design-system/
++  ui-web/
++```
++
++## Переменные окружения backend
++
++Обязательные переменные для бота:
++
++- `BOT_TOKEN`
++- `MARZBAN_BASE_URL`
++- `MARZBAN_USERNAME`
++- `MARZBAN_PASSWORD`
++
++Дополнительные переменные:
++
++- `APP_ENV=production`
++- `BOT_USERNAME=@AllyVPNsbot`
++- `DATABASE_URL=sqlite+aiosqlite:///./allyvpn.db`
++- `MINIAPP_URL=https://your-public-miniapp-url`
++- `SUPPORT_USERNAME=`
++- `ADMIN_TELEGRAM_IDS=123456789,987654321`
++- `LOG_LEVEL=INFO`
++
++## Локальная подготовка
++
++Установка backend:
++
++```powershell
++python -m venv .venv
++.venv\Scripts\Activate.ps1
++python -m pip install -r requirements.txt
++```
++
++Заполни `.env` реальными backend-данными:
++
++```env
++BOT_TOKEN=your_real_token_here
++MARZBAN_BASE_URL=https://your-marzban-host
++MARZBAN_USERNAME=admin_username
++MARZBAN_PASSWORD=admin_password
++MINIAPP_URL=https://your-public-miniapp-url
++ADMIN_TELEGRAM_IDS=your_telegram_id
++```
++
++Токен Telegram нужен только для стороны бота:
++
++- `BOT_TOKEN` нужен, чтобы запускать бота и обновлять кнопку Mini App в Telegram
++- сам frontend Mini App не должен хранить токен бота и не должен его получать
++
++Установка frontend-workspaces:
++
++```powershell
++npm install
++```
++
++## Команды запуска
++
++Запуск Telegram-бота:
++
++```powershell
++python -m app.bot.main
++```
++
++Обновление Telegram-команд и кнопки Mini App без полного запуска backend:
++
++```powershell
++python -m app.bot.sync_telegram_ui
++```
++
++Запуск API:
++
++```powershell
++uvicorn app.api.main:app --reload
++```
++
++Запуск сайта:
++
++```powershell
++npm run dev:website
++```
++
++Стабильный статический preview сайта:
++
++```powershell
++powershell -ExecutionPolicy Bypass -File .\scripts\start-website-static.ps1
++```
++
++Запуск Mini App локально:
++
++```powershell
++npm run dev:miniapp
++```
++
++Стабильный статический preview Mini App:
++
++```powershell
++powershell -ExecutionPolicy Bypass -File .\scripts\start-miniapp-static.ps1
++```
++
++Стабильный статический preview с временным публичным URL:
++
++```powershell
++powershell -ExecutionPolicy Bypass -File .\scripts\start-miniapp-static.ps1 -Public
++```
++
++Проверка и сборка web-части:
++
++```powershell
++npm run check:web
++```
++
++## Текущий scope фронтенда
++
++Сейчас реализовано:
++
++- `apps/website`: каркас premium landing page
++- `apps/miniapp`: Telegram-ориентированный личный кабинет
++- `packages/design-system`: tokens, themes, подключение шрифтов
++- `packages/ui-web`: общие web-компоненты
++
++Пока не реализовано:
++
++- реальная backend-валидация Telegram WebApp auth
++- платежные сценарии
++- полноценные продовые контентные страницы и billing-backend
++
++## Локальное визуальное тестирование
++
++Сайт:
++
++- запусти `npm run dev:website`
++- открой локальный URL в браузере
++- проверь desktop и mobile responsive-режимы
++- если dev-сервер рендерит пустую страницу, используй static preview на `http://127.0.0.1:4300`
++
++Mini App:
++
++- запусти `npm run dev:miniapp`
++- пробрось локальный порт наружу через `cloudflared` или `ngrok`
++- вставь полученный `https` URL в `MINIAPP_URL` в `.env`
++- перезапусти Python-бота; он автоматически обновит кнопку Mini App в Telegram
++- открой бота в Telegram и запусти Mini App внутри него
++- Mini App dev-сервер работает на `http://localhost:3001`
++- если Telegram Desktop или локальный браузер на Windows показывает пустую страницу, используй static preview вместо Vite dev mode
++
++Вспомогательная команда для Windows:
++
++```powershell
++powershell -ExecutionPolicy Bypass -File .\scripts\start-miniapp-public.ps1
++```
++
++Этот helper:
++
++- запускает dev-сервер Mini App
++- автоматически определяет фактический локальный порт
++- поднимает публичный `cloudflared` tunnel
++- записывает публичный `MINIAPP_URL` обратно в `.env`
++- выводит следующую команду для синхронизации кнопки Telegram
++
++Пример с `cloudflared`:
++
++```powershell
++npm run dev:miniapp
++cloudflared tunnel --url http://localhost:3001
++```
++
++После этого вставь сгенерированный `https://...trycloudflare.com` URL в `MINIAPP_URL` и перезапусти:
++
++```powershell
++python -m app.bot.main
++```
++
++Если нужно только обновить кнопку Mini App после смены URL, запусти:
++
++```powershell
++python -m app.bot.sync_telegram_ui
++```
++
++## Зачем нужен Mini App, если бот уже работает
++
++Бот по-прежнему полезен для команд, уведомлений и fallback-сценариев.
++
++Mini App нужен для:
++
++- более удобного UX личного кабинета
++- отображения тарифов и billing
++- профиля и пользовательских настроек
++- точек входа в поддержку
++- onboarding-сценариев без длинных чат-флоу
++
++## Как делиться Mini App с другом
++
++Твой друг сможет открыть тот же Mini App, если соблюдены все условия:
++
++- `MINIAPP_URL` указывает на публичный `https` адрес
++- dev-сервер Mini App всё ещё работает на твоей машине
++- публичный tunnel всё ещё жив
++- кнопка меню бота синхронизирована через `python -m app.bot.sync_telegram_ui`
++
++Для коротких тестов `cloudflared` достаточно.
++
++Для нормального стабильного использования лучше задеплоить `apps/miniapp` на статический хостинг, например:
++
++- Cloudflare Pages
++- Vercel
++- Netlify
++
++После этого нужно поставить постоянный домен в `MINIAPP_URL` вместо временного `trycloudflare` URL.
++
++## Что дальше
++
++- подключить Mini App к backend API и Telegram WebApp auth validation
++- превратить текущий каркас сайта в полноценный публичный продуктовый сайт
++
++## Стабильный URL для Mini App
++
++Временные туннели вроде `trycloudflare`, `localhost.run` или `loca.lt` подходят только для быстрых локальных превью.
++Для нормального использования Telegram Mini App они недостаточно стабильны и могут перестать работать в любой момент, если изменится локальный процесс, tunnel или endpoint провайдера.
++
++В репозиторий уже добавлен workflow для GitHub Pages, который публикует совместимую с Telegram статическую версию Mini App из:
++
++`apps/miniapp/compat`
++
++Ожидаемый долгоживущий URL после включения GitHub Pages для репозитория:
++
++`https://insanekinge.github.io/anny-vpn/`
++
++После успешного выполнения workflow используй этот URL как `MINIAPP_URL` и укажи этот же адрес в:
++
++`@BotFather -> Bot Settings -> Menu Button`
